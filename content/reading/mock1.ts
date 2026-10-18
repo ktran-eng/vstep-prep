@@ -1,0 +1,677 @@
+import type { ReadingSetInput } from "@/domain/content-schema";
+
+export const readingMock1: ReadingSetInput[] = [
+  {
+    id: "rd-m1-night-market",
+    title: "The Riverside Night Market Returns",
+    level: "B1",
+    topic: "Community & local life",
+    passage: `After a break of almost three years, the Riverside Night Market will reopen on the first Saturday of next month. The market, which runs along the old river path between Tran Phu Bridge and the ferry pier, was closed when the path was rebuilt to protect it from flooding. Local residents have waited a long time for its return, and the town council expects more than five thousand visitors on the opening night.
+
+The new market will be slightly smaller than before. In the past, more than two hundred stalls crowded the path, and many visitors complained that it was difficult to walk, especially with young children. This time, the council has limited the number of stalls to one hundred and forty, and each stall must stay inside a marked area. Wider spaces have also been left near the bridge so that people can stop and look at the river without blocking others.
+
+Food will still be the main attraction. About half of the stalls will sell local dishes, from grilled rice cakes to fresh sugarcane juice. However, there is one important change. Sellers are no longer allowed to give out plastic bags or plastic straws. Instead, the council has provided every food seller with a supply of paper bags for the first month, and visitors are encouraged to bring their own containers. A stall near the ferry pier will sell cheap reusable cups for those who forget.
+
+The opening hours have changed as well. The market used to open every evening, but this caused problems for people living nearby, who said the noise often continued past midnight. From now on, it will open only on Friday, Saturday and Sunday, from 5 p.m. to 10:30 p.m. Music will be allowed on a small stage near the bridge, but it must stop by 10 p.m.
+
+Getting there may be the biggest challenge. Because the river path is narrow, cars and motorbikes cannot park along it. The council recommends that visitors park at the sports centre on Le Loi Street, where parking is free on market nights, and then take the free shuttle bus, which leaves every fifteen minutes. Those who live within walking distance are, of course, encouraged to walk. Bicycles can be left in a special parking area next to the bridge, which will be watched by security staff until the market closes.
+
+Stall holders were chosen by lottery from more than six hundred applications. Ms Nguyen Thi Lan, who has sold handmade soap at the market for eight years, was one of the lucky ones. "I was worried that I would not get a place," she said. "The market is not just about money for me. It is where I meet my regular customers and catch up with friends. I'm really glad it's coming back."
+
+Anyone with questions about the market can contact the council's community office by phone or visit its website. The office also welcomes volunteers to help with directions and recycling on opening night.`,
+    questions: [
+      {
+        id: "rd-m1-nm-q1",
+        type: "main_idea",
+        difficulty: 2,
+        prompt: "What is the passage mainly about?",
+        options: {
+          A: "The history of the old river path",
+          B: "The reopening of a market and the changes made to it",
+          C: "A council plan to prevent flooding in the town",
+          D: "Ways to reduce plastic waste at home",
+        },
+        answer: "B",
+        explanation:
+          "The first paragraph announces that the market will reopen, and every following paragraph describes something new about it: fewer stalls, a ban on plastic, new opening hours and parking arrangements.",
+        evidence: { ref: "P1", quote: "the Riverside Night Market will reopen on the first Saturday of next month" },
+        distractors: {
+          A: "The river path is mentioned only as the location of the market.",
+          C: "Flooding explains why the path was rebuilt, but it is not the topic of the text.",
+          D: "The plastic ban is one detail about the market, not about homes.",
+        },
+      },
+      {
+        id: "rd-m1-nm-q2",
+        type: "detail",
+        difficulty: 1,
+        prompt: "Why was the market closed?",
+        options: {
+          A: "Not enough people visited it.",
+          B: "The path it uses was being rebuilt.",
+          C: "Residents complained about the noise.",
+          D: "The sellers moved to a new location.",
+        },
+        answer: "B",
+        explanation: "Paragraph 1 says the market was closed while the river path was rebuilt to protect it from flooding.",
+        evidence: { ref: "P1", quote: "was closed when the path was rebuilt to protect it from flooding" },
+        distractors: { C: "Noise complaints led to new opening hours, not to the closure." },
+      },
+      {
+        id: "rd-m1-nm-q3",
+        type: "detail",
+        difficulty: 1,
+        prompt: "How many stalls will the new market have?",
+        options: { A: "100", B: "140", C: "200", D: "600" },
+        answer: "B",
+        explanation: "The council has limited the market to one hundred and forty stalls. Two hundred was the old number and six hundred was the number of applications.",
+        evidence: { ref: "P2", quote: "limited the number of stalls to one hundred and forty" },
+      },
+      {
+        id: "rd-m1-nm-q4",
+        type: "detail",
+        difficulty: 2,
+        prompt: "According to paragraph 2, what problem did visitors have in the past?",
+        options: {
+          A: "It was hard to move through the crowded market.",
+          B: "The food was too expensive.",
+          C: "There was nowhere to sit and eat.",
+          D: "The stalls closed too early.",
+        },
+        answer: "A",
+        explanation: "With more than two hundred stalls on the path, visitors said it was difficult to walk, especially with children.",
+        evidence: { ref: "P2", quote: "many visitors complained that it was difficult to walk" },
+      },
+      {
+        id: "rd-m1-nm-q5",
+        type: "vocabulary",
+        difficulty: 2,
+        prompt: 'The word "attraction" in paragraph 3 is closest in meaning to',
+        options: {
+          A: "something that makes people want to come",
+          B: "a kind of traditional dish",
+          C: "a rule that sellers must follow",
+          D: "the price of a product",
+        },
+        answer: "A",
+        explanation: 'An "attraction" is something that draws people\'s interest. The sentence says food is the main reason people visit the market.',
+        evidence: { ref: "P3", quote: "Food will still be the main attraction." },
+        vocab: [{ term: "attraction (n)", note: "điều thu hút, điểm hấp dẫn" }],
+      },
+      {
+        id: "rd-m1-nm-q6",
+        type: "detail",
+        difficulty: 2,
+        prompt: "What has the council given to food sellers?",
+        options: {
+          A: "Cheap reusable cups",
+          B: "Plastic straws",
+          C: "A supply of paper bags",
+          D: "Containers for customers",
+        },
+        answer: "C",
+        explanation: "The council provided every food seller with paper bags for the first month. The reusable cups are sold at one stall, and visitors are asked to bring their own containers.",
+        evidence: { ref: "P3", quote: "the council has provided every food seller with a supply of paper bags for the first month" },
+        distractors: { A: "Reusable cups are sold to visitors, not given to sellers.", B: "Plastic straws are now banned." },
+      },
+      {
+        id: "rd-m1-nm-q7",
+        type: "inference",
+        difficulty: 3,
+        prompt: "Why will the market now open only three evenings a week?",
+        options: {
+          A: "Sellers wanted more time to rest.",
+          B: "People living nearby were disturbed by late noise.",
+          C: "Fewer visitors came on weekdays.",
+          D: "The shuttle bus runs only at weekends.",
+        },
+        answer: "B",
+        explanation: "Paragraph 4 links the change to complaints from nearby residents, who said the noise often went on past midnight.",
+        evidence: { ref: "P4", quote: "who said the noise often continued past midnight" },
+      },
+      {
+        id: "rd-m1-nm-q8",
+        type: "detail",
+        difficulty: 2,
+        prompt: "What does the council advise visitors who come by motorbike to do?",
+        options: {
+          A: "Park along the river path",
+          B: "Park near Tran Phu Bridge",
+          C: "Park at the sports centre and take the shuttle bus",
+          D: "Pay for parking on Le Loi Street",
+        },
+        answer: "C",
+        explanation: "Vehicles cannot park on the narrow path. The council recommends the free parking at the sports centre on Le Loi Street, followed by the free shuttle bus.",
+        evidence: { ref: "P5", quote: "park at the sports centre on Le Loi Street" },
+        distractors: { D: "Parking at the sports centre is free on market nights." },
+      },
+      {
+        id: "rd-m1-nm-q9",
+        type: "reference",
+        difficulty: 2,
+        prompt: 'The word "It" in "It is where I meet my regular customers" (paragraph 6) refers to',
+        options: { A: "the money", B: "the market", C: "the lottery", D: "her soap" },
+        answer: "B",
+        explanation: 'Ms Lan has just said "The market is not just about money for me", so "It" refers back to the market.',
+        evidence: { ref: "P6", quote: "It is where I meet my regular customers" },
+      },
+      {
+        id: "rd-m1-nm-q10",
+        type: "attitude",
+        difficulty: 2,
+        prompt: "How does Ms Nguyen Thi Lan feel about the market reopening?",
+        options: {
+          A: "Disappointed with the lottery",
+          B: "Pleased that it is coming back",
+          C: "Worried about losing customers",
+          D: "Unsure whether to take part",
+        },
+        answer: "B",
+        explanation: "She says directly that she is really glad the market is coming back. She was worried earlier, but only about getting a place.",
+        evidence: { ref: "P6", quote: "I'm really glad it's coming back." },
+      },
+    ],
+  },
+  {
+    id: "rd-m1-names-faces",
+    title: "Why We Forget Names but Remember Faces",
+    level: "B2",
+    topic: "Psychology",
+    passage: `Most of us have had the embarrassing experience of greeting someone whose face we recognise immediately but whose name has completely disappeared from our memory. This is so common that many people assume they simply have "a bad memory for names". Psychologists, however, argue that the problem has less to do with individual weakness and more to do with the way human memory is organised.
+
+One explanation is that faces carry far more information than names. When we look at a face, we take in its shape, expression, age and many other features at once, and these details connect to things we already know about the person, such as where we met them or what they do. A name, by contrast, is usually an arbitrary label. There is nothing about the sound "Daniel" or "Hoa" that tells us anything about the person who has it, so the brain has very little to attach it to. Even a nickname usually carries more meaning, because it is often based on a person's appearance, personality or a shared memory.
+
+This idea is supported by a well-known finding sometimes called the "Baker/baker paradox". In experiments, participants were shown photographs of strangers. Some were told that a man was called Baker; others were told that he was a baker. Days later, those who had learned his occupation were much more likely to remember it than those who had learned the identical word as a surname. The word was the same, but as a job it brought with it a rich network of associations - bread, early mornings, the smell of an oven - while as a name it stood alone.
+
+Attention also plays a role. Introductions often happen at busy moments: we are shaking hands, smiling, and thinking about what to say next. As a result, the name may never be properly stored in the first place. What feels like forgetting is, in many cases, a failure of encoding rather than a failure of retrieval.
+
+The good news is that these findings suggest practical strategies. Repeating a person's name aloud soon after hearing it gives the brain a second chance to store it. Linking the name to a vivid image or to something meaningful - imagining "Rose" holding a bunch of flowers, for example - turns an empty label into something with associations. Some people also find it helpful to ask how a name is spelt or where it comes from, which forces them to pay attention and often starts a real conversation.
+
+None of these techniques is perfect, and everyone occasionally draws a blank. Yet understanding why names are so easily lost may make the experience less embarrassing. Forgetting a name is not usually a sign that we do not care about someone; it is a reminder that our memory works best when information is meaningful, and that names, on their own, rarely are.`,
+    questions: [
+      {
+        id: "rd-m1-nf-q1",
+        type: "main_idea",
+        difficulty: 3,
+        prompt: "What is the main purpose of the passage?",
+        options: {
+          A: "To explain why names are harder to remember than faces and suggest ways to improve",
+          B: "To prove that some people are born with a poor memory for names",
+          C: "To describe one psychological experiment in detail",
+          D: "To argue that recognising faces is a skill learned in childhood",
+        },
+        answer: "A",
+        explanation: "The text explains the causes (meaningless labels, attention) in paragraphs 2–4 and gives practical strategies in paragraph 5.",
+        evidence: { ref: "P1", quote: "the problem has less to do with individual weakness and more to do with the way human memory is organised" },
+        distractors: { B: "The writer argues against the idea of individual weakness.", C: "The experiment is only one piece of supporting evidence." },
+      },
+      {
+        id: "rd-m1-nf-q2",
+        type: "detail",
+        difficulty: 2,
+        prompt: "According to paragraph 2, why are faces easier to remember than names?",
+        options: {
+          A: "Faces connect to many things we already know about a person.",
+          B: "We see faces more often than we hear names.",
+          C: "Faces change very little as people get older.",
+          D: "Faces are processed more slowly by the brain.",
+        },
+        answer: "A",
+        explanation: "The details of a face link to existing knowledge, such as where we met the person. A name has nothing to attach to.",
+        evidence: { ref: "P2", quote: "these details connect to things we already know about the person" },
+      },
+      {
+        id: "rd-m1-nf-q3",
+        type: "vocabulary",
+        difficulty: 3,
+        prompt: 'The word "arbitrary" in paragraph 2 is closest in meaning to',
+        options: {
+          A: "not based on any meaningful reason",
+          B: "difficult to pronounce",
+          C: "officially registered",
+          D: "extremely common",
+        },
+        answer: "A",
+        explanation: 'The next sentence explains it: the sound of a name tells us nothing about the person, so the label is random rather than meaningful.',
+        evidence: { ref: "P2", quote: "A name, by contrast, is usually an arbitrary label." },
+        vocab: [{ term: "arbitrary (adj)", note: "tuỳ ý, ngẫu nhiên, không dựa trên lý do" }],
+      },
+      {
+        id: "rd-m1-nf-q4",
+        type: "detail",
+        difficulty: 2,
+        prompt: "In the experiment described in paragraph 3, which participants remembered the information better?",
+        options: {
+          A: "Those who were told the man's surname",
+          B: "Those who were told the man's job",
+          C: "Those who saw the most photographs",
+          D: "Those who had met the man before",
+        },
+        answer: "B",
+        explanation: "Participants who learned that he was a baker (his occupation) remembered it much better than those who learned Baker as his surname.",
+        evidence: { ref: "P3", quote: "those who had learned his occupation were much more likely to remember it" },
+      },
+      {
+        id: "rd-m1-nf-q5",
+        type: "inference",
+        difficulty: 3,
+        prompt: "What can be inferred from the Baker/baker experiment?",
+        options: {
+          A: "How well we remember a word depends on the associations it has.",
+          B: "Job titles are easier to pronounce than surnames.",
+          C: "The participants personally knew several bakers.",
+          D: "Photographs make it harder to remember information.",
+        },
+        answer: "A",
+        explanation: "The word was identical in both conditions. Only its meaning differed: as a job it brought associations, and as a name it did not.",
+        evidence: { ref: "P3", quote: "as a job it brought with it a rich network of associations" },
+      },
+      {
+        id: "rd-m1-nf-q6",
+        type: "reference",
+        difficulty: 2,
+        prompt: 'The word "it" in "as a name it stood alone" (paragraph 3) refers to',
+        options: { A: "the word", B: "the photograph", C: "the oven", D: "the experiment" },
+        answer: "A",
+        explanation: 'The sentence contrasts the same word used as a job and as a name: "The word was the same, but as a job it… while as a name it stood alone."',
+        evidence: { ref: "P3", quote: "while as a name it stood alone" },
+      },
+      {
+        id: "rd-m1-nf-q7",
+        type: "detail",
+        difficulty: 2,
+        prompt: "According to paragraph 4, why might a name never be stored in memory?",
+        options: {
+          A: "We are distracted by other things during introductions.",
+          B: "Many names are too long to remember.",
+          C: "We meet too many new people every day.",
+          D: "We are usually tired at social events.",
+        },
+        answer: "A",
+        explanation: "Introductions happen at busy moments, when we are shaking hands and thinking about what to say, so we do not pay full attention to the name.",
+        evidence: { ref: "P4", quote: "Introductions often happen at busy moments" },
+      },
+      {
+        id: "rd-m1-nf-q8",
+        type: "vocabulary",
+        difficulty: 4,
+        prompt: 'In paragraph 4, "encoding" refers to',
+        options: {
+          A: "the process of storing information in memory",
+          B: "writing a message in a secret code",
+          C: "recalling information at a later time",
+          D: "forgetting something on purpose",
+        },
+        answer: "A",
+        explanation:
+          'Encoding is contrasted with retrieval (recalling). The previous sentence says the name "may never be properly stored", so encoding means storing.',
+        evidence: { ref: "P4", quote: "a failure of encoding rather than a failure of retrieval" },
+        distractors: { C: "Recalling is what the text calls retrieval." },
+      },
+      {
+        id: "rd-m1-nf-q9",
+        type: "purpose",
+        difficulty: 3,
+        prompt: 'Why does the writer mention imagining "Rose" holding a bunch of flowers?',
+        options: {
+          A: "To give an example of linking a name to an image",
+          B: "To show that flowers are easy to remember",
+          C: "To describe a person the writer has met",
+          D: "To show that some techniques do not work",
+        },
+        answer: "A",
+        explanation: 'The phrase "for example" shows it illustrates the strategy of linking a name to a vivid image.',
+        evidence: { ref: "P5", quote: "holding a bunch of flowers, for example" },
+      },
+      {
+        id: "rd-m1-nf-q10",
+        type: "attitude",
+        difficulty: 3,
+        prompt: "Which best describes the writer's attitude towards people who forget names?",
+        options: {
+          A: "Reassuring and understanding",
+          B: "Critical of their carelessness",
+          C: "Alarmed about their memory",
+          D: "Completely indifferent",
+        },
+        answer: "A",
+        explanation: "The writer says forgetting a name is not a sign of not caring, and that understanding why it happens can make it less embarrassing.",
+        evidence: { ref: "P6", quote: "may make the experience less embarrassing" },
+      },
+    ],
+  },
+  {
+    id: "rd-m1-rooftop-farms",
+    title: "Farming on the Rooftops",
+    level: "B2",
+    topic: "Environment & cities",
+    passage: `In many fast-growing cities, land at ground level is too expensive to grow food on. Rooftops, however, are often empty. Over the past decade, a growing number of businesses and community groups have begun turning these unused spaces into gardens and small farms. Supporters claim that rooftop farming can make cities greener, cooler and more self-sufficient. Critics agree that it has benefits but question whether it can ever produce food on a meaningful scale.
+
+The environmental advantages are perhaps the easiest to demonstrate. Plants and soil absorb heat that would otherwise be trapped by concrete and metal roofs, so buildings with green roofs tend to stay cooler in summer. This reduces the need for air conditioning, which in turn cuts electricity use. Rooftop gardens also capture rainwater. During heavy storms, they slow down the flow of water into drains, lowering the risk of street flooding - a serious concern in coastal cities such as Ho Chi Minh City and Bangkok.
+
+Social benefits are harder to measure but are frequently mentioned by participants. Community rooftop gardens give residents of crowded apartment blocks a shared outdoor space, and many projects run workshops for schoolchildren who have never seen vegetables growing. A coordinator of one project in Singapore described the garden as "a place where neighbours who had lived side by side for years finally learned each other's names." Some projects also sell their produce at weekend markets, using the money to buy seeds and tools for the following season.
+
+The question of production is more complicated. Rooftops are exposed to strong sun and wind, and their weight limits mean that soil must be shallow. As a result, rooftop farms tend to grow leafy greens, herbs and tomatoes rather than rice or root vegetables, which need deep soil and large areas. One study of a large commercial rooftop farm found that it supplied fresh vegetables to several nearby restaurants and shops, but its total output would feed only a few hundred people. For a city of millions, this is clearly not enough.
+
+Cost is another obstacle. Before a roof can be used, engineers must confirm that it can support the extra weight of soil, water and people. Waterproofing often has to be improved, and safety barriers installed. These expenses can make projects difficult to start without help from government grants or private sponsors. Some cities, including Paris and Tokyo, now require or encourage green roofs on new buildings, which reduces the cost because the necessary structure is included from the beginning.
+
+Perhaps rooftop farming should be judged less as a solution to food supply and more as one part of a wider strategy for healthier cities. Even if it cannot replace traditional agriculture, it can cool buildings, reduce flooding and bring communities together - achievements that are valuable in themselves.`,
+    questions: [
+      {
+        id: "rd-m1-rf-q1",
+        type: "main_idea",
+        difficulty: 3,
+        prompt: "Which statement best summarises the passage?",
+        options: {
+          A: "Rooftop farming has several benefits but produces only limited amounts of food.",
+          B: "Rooftop farms will soon replace traditional agriculture in large cities.",
+          C: "Rooftop farming is too expensive to be worth attempting.",
+          D: "Asian cities are the world leaders in rooftop farming.",
+        },
+        answer: "A",
+        explanation: "The text describes environmental and social benefits, but paragraph 4 shows that production is small. The conclusion values the farms for reasons other than food supply.",
+        evidence: { ref: "P6", quote: "Even if it cannot replace traditional agriculture, it can cool buildings" },
+      },
+      {
+        id: "rd-m1-rf-q2",
+        type: "detail",
+        difficulty: 2,
+        prompt: "How can green roofs reduce electricity use?",
+        options: {
+          A: "They keep buildings cooler, so less air conditioning is needed.",
+          B: "They generate electricity from sunlight.",
+          C: "They reduce the number of lights needed indoors.",
+          D: "They store rainwater for cooling machines.",
+        },
+        answer: "A",
+        explanation: "Plants and soil absorb heat, so buildings stay cooler, which reduces the need for air conditioning and cuts electricity use.",
+        evidence: { ref: "P2", quote: "This reduces the need for air conditioning" },
+      },
+      {
+        id: "rd-m1-rf-q3",
+        type: "purpose",
+        difficulty: 3,
+        prompt: "Why does the writer mention Ho Chi Minh City and Bangkok?",
+        options: {
+          A: "As examples of cities where street flooding is a concern",
+          B: "As the cities with the most rooftop farms",
+          C: "As cities that require green roofs on new buildings",
+          D: "As the hottest cities in the region",
+        },
+        answer: "A",
+        explanation: "The two cities illustrate coastal cities where flooding is a serious concern. Paris and Tokyo are the cities that encourage green roofs.",
+        evidence: { ref: "P2", quote: "a serious concern in coastal cities such as Ho Chi Minh City and Bangkok" },
+      },
+      {
+        id: "rd-m1-rf-q4",
+        type: "vocabulary",
+        difficulty: 3,
+        prompt: 'The word "self-sufficient" in paragraph 1 is closest in meaning to',
+        options: {
+          A: "able to meet their own needs without outside help",
+          B: "wealthy and well-developed",
+          C: "crowded with people",
+          D: "modern in design",
+        },
+        answer: "A",
+        explanation: 'Self-sufficient means able to provide what you need yourself. Here it means cities producing some of their own food.',
+        evidence: { ref: "P1", quote: "make cities greener, cooler and more self-sufficient" },
+        vocab: [{ term: "self-sufficient (adj)", note: "tự cung tự cấp" }],
+      },
+      {
+        id: "rd-m1-rf-q5",
+        type: "inference",
+        difficulty: 3,
+        prompt: "What does the coordinator's comment in paragraph 3 suggest?",
+        options: {
+          A: "The garden helped neighbours build relationships.",
+          B: "The neighbours did not like each other.",
+          C: "The garden was too small for the building.",
+          D: "Many residents moved out of the building.",
+        },
+        answer: "A",
+        explanation: "Neighbours who had lived side by side for years only learned each other's names through the garden, so it brought them together.",
+        evidence: { ref: "P3", quote: "finally learned each other's names" },
+      },
+      {
+        id: "rd-m1-rf-q6",
+        type: "detail",
+        difficulty: 2,
+        prompt: "Why do rooftop farms usually grow leafy greens rather than rice?",
+        options: {
+          A: "Weight limits mean the soil must be shallow.",
+          B: "Restaurants prefer to buy leafy greens.",
+          C: "Rice needs more sunlight than rooftops get.",
+          D: "City laws do not allow rice to be grown.",
+        },
+        answer: "A",
+        explanation: "Roofs can only carry limited weight, so the soil is shallow. Rice and root vegetables need deep soil and large areas.",
+        evidence: { ref: "P4", quote: "their weight limits mean that soil must be shallow" },
+        distractors: { C: "Rooftops actually receive strong sun." },
+      },
+      {
+        id: "rd-m1-rf-q7",
+        type: "reference",
+        difficulty: 3,
+        prompt: 'The word "this" in "For a city of millions, this is clearly not enough" (paragraph 4) refers to',
+        options: {
+          A: "the amount of food the farm produces",
+          B: "the number of nearby restaurants",
+          C: "the size of the rooftop",
+          D: "the study of the farm",
+        },
+        answer: "A",
+        explanation: '"This" refers back to the farm\'s total output, which would feed only a few hundred people.',
+        evidence: { ref: "P4", quote: "its total output would feed only a few hundred people" },
+      },
+      {
+        id: "rd-m1-rf-q8",
+        type: "detail",
+        difficulty: 2,
+        prompt: "What must happen before a roof can be used for farming?",
+        options: {
+          A: "Engineers must check that it can carry the extra weight.",
+          B: "The government must buy the building.",
+          C: "Nearby restaurants must agree to buy the produce.",
+          D: "Residents must vote on the project.",
+        },
+        answer: "A",
+        explanation: "Engineers must confirm that the roof can support the weight of soil, water and people.",
+        evidence: { ref: "P5", quote: "engineers must confirm that it can support the extra weight" },
+      },
+      {
+        id: "rd-m1-rf-q9",
+        type: "inference",
+        difficulty: 4,
+        prompt: "Why do green-roof rules in Paris and Tokyo make projects cheaper?",
+        options: {
+          A: "Buildings are designed to support green roofs from the start.",
+          B: "The government pays all the costs.",
+          C: "New buildings do not need waterproofing.",
+          D: "New buildings have smaller roofs.",
+        },
+        answer: "A",
+        explanation: "Because the necessary structure is included when the building is designed, it does not have to be added later at extra cost.",
+        evidence: { ref: "P5", quote: "the necessary structure is included from the beginning" },
+      },
+      {
+        id: "rd-m1-rf-q10",
+        type: "attitude",
+        difficulty: 3,
+        prompt: "What is the writer's overall view of rooftop farming?",
+        options: {
+          A: "Balanced: it is worthwhile even though it cannot feed whole cities",
+          B: "Strongly negative: it wastes money",
+          C: "Enthusiastic: it will end food shortages",
+          D: "Uninterested: it is a passing trend",
+        },
+        answer: "A",
+        explanation: "The writer admits its limits as a food source but concludes that its other achievements are valuable in themselves.",
+        evidence: { ref: "P6", quote: "achievements that are valuable in themselves" },
+      },
+    ],
+  },
+  {
+    id: "rd-m1-attention-economy",
+    title: "The Attention Economy and the Design of Persuasion",
+    level: "C1",
+    topic: "Technology & society",
+    passage: `For most of history, the scarce resource in communication was information. Books were expensive, newspapers were short, and access to expert knowledge depended on where one lived. Today the situation has been reversed. Information is abundant, often free, and available almost instantly; what has become scarce is the attention needed to process it. The economist Herbert Simon anticipated this shift as early as 1971, observing that "a wealth of information creates a poverty of attention." Half a century later, his remark reads less like a prediction than a description of everyday life.
+
+Many of the most successful technology companies have built their business models around this scarcity. Because their revenue depends largely on advertising, what they ultimately sell is not a product to their users but their users' time to advertisers. It follows that the longer people stay on a platform, the more valuable that platform becomes. Designers have accordingly developed features - endless scrolling feeds, autoplaying videos, notifications timed to draw users back - that are remarkably effective at prolonging engagement.
+
+Critics argue that these techniques exploit predictable features of human psychology. Variable rewards, in which a pleasing outcome arrives unpredictably, are known to be particularly compelling; the same principle underlies slot machines. Each refresh of a feed may or may not reveal something interesting, and it is precisely this uncertainty that makes checking so hard to resist. From this perspective, the problem is not that individuals lack willpower but that they are competing against systems explicitly optimised to defeat it.
+
+Defenders of the industry respond that such criticism underestimates users' agency. People choose which applications to install and how to use them, and many derive genuine value from staying in touch with friends or discovering new ideas online. They also point out that attention-seeking design is hardly new: newspaper headlines, television cliffhangers and supermarket layouts have long been engineered to capture interest. What has changed, they suggest, is the scale and precision of the techniques rather than their fundamental nature.
+
+Yet scale and precision may be exactly what matters. A television programme is broadcast identically to millions of viewers, whereas a modern platform can adjust what each individual sees in real time, learning from every pause and click. This capacity for continuous personalisation arguably represents a qualitative change, not merely a quantitative one. A persuasive technique that adapts to its target is a different kind of thing from one that does not.
+
+Proposed responses range from the personal to the regulatory. Some advocate "digital minimalism", deliberately limiting the applications one uses. Others call for design standards that would, for instance, require platforms to disable autoplay by default or to show users how much time they have spent. Whichever approach prevails, the debate reflects a broader recognition: in an age of informational abundance, how attention is captured and spent has become a question not only of individual habit but of public concern.`,
+    questions: [
+      {
+        id: "rd-m1-ae-q1",
+        type: "main_idea",
+        difficulty: 4,
+        prompt: "What is the passage mainly concerned with?",
+        options: {
+          A: "The debate about technology designed to capture people's attention",
+          B: "The history of newspaper and television advertising",
+          C: "Practical advice on using social media less",
+          D: "Herbert Simon's contribution to economic theory",
+        },
+        answer: "A",
+        explanation: "The text explains why platforms compete for attention, then presents the critics, the defenders and possible responses. The last paragraph names it a debate.",
+        evidence: { ref: "P6", quote: "the debate reflects a broader recognition" },
+        distractors: { C: "Digital minimalism is mentioned only briefly as one proposed response.", D: "Simon is quoted only to introduce the idea of scarce attention." },
+      },
+      {
+        id: "rd-m1-ae-q2",
+        type: "inference",
+        difficulty: 4,
+        prompt: 'What does the writer imply by saying that Simon\'s remark "reads less like a prediction than a description of everyday life"?',
+        options: {
+          A: "What Simon foresaw has now become ordinary reality.",
+          B: "Simon's prediction turned out to be wrong.",
+          C: "Simon was describing his own daily routine.",
+          D: "Most people today have never heard of Simon.",
+        },
+        answer: "A",
+        explanation: "Something that was a prediction in 1971 now simply describes how people live, so it has come true.",
+        evidence: { ref: "P1", quote: "reads less like a prediction than a description of everyday life" },
+      },
+      {
+        id: "rd-m1-ae-q3",
+        type: "detail",
+        difficulty: 3,
+        prompt: "According to paragraph 2, what do advertising-funded platforms ultimately sell?",
+        options: {
+          A: "Their users' time to advertisers",
+          B: "Products to their users",
+          C: "Software to other companies",
+          D: "Subscriptions to news services",
+        },
+        answer: "A",
+        explanation: "The text states that what they ultimately sell is not a product to users but their users' time to advertisers.",
+        evidence: { ref: "P2", quote: "their users' time to advertisers" },
+      },
+      {
+        id: "rd-m1-ae-q4",
+        type: "vocabulary",
+        difficulty: 3,
+        prompt: 'The word "prolonging" in paragraph 2 is closest in meaning to',
+        options: { A: "extending", B: "measuring", C: "reducing", D: "rewarding" },
+        answer: "A",
+        explanation: 'The features are designed so that people stay longer, so "prolonging engagement" means making it last longer.',
+        evidence: { ref: "P2", quote: "remarkably effective at prolonging engagement" },
+      },
+      {
+        id: "rd-m1-ae-q5",
+        type: "purpose",
+        difficulty: 4,
+        prompt: "Why does the writer mention slot machines?",
+        options: {
+          A: "To illustrate the principle of variable rewards",
+          B: "To compare the profits of casinos and technology firms",
+          C: "To warn readers about the dangers of gambling",
+          D: "To show that online games are popular",
+        },
+        answer: "A",
+        explanation: "Slot machines are a familiar example of the same principle: unpredictable rewards make an action hard to stop.",
+        evidence: { ref: "P3", quote: "the same principle underlies slot machines" },
+      },
+      {
+        id: "rd-m1-ae-q6",
+        type: "inference",
+        difficulty: 4,
+        prompt: "According to the critics in paragraph 3, why do people find it hard to stop checking their feeds?",
+        options: {
+          A: "Systems are deliberately designed to overcome their self-control.",
+          B: "People today have less willpower than in the past.",
+          C: "Most feeds contain nothing of interest.",
+          D: "Uncertainty makes people less likely to check.",
+        },
+        answer: "A",
+        explanation: "The critics reject the idea that users lack willpower. They say users are up against systems explicitly optimised to defeat it.",
+        evidence: { ref: "P3", quote: "the problem is not that individuals lack willpower" },
+        distractors: { B: "This is the view the critics reject.", D: "The text says uncertainty makes checking harder to resist, not less likely." },
+      },
+      {
+        id: "rd-m1-ae-q7",
+        type: "reference",
+        difficulty: 3,
+        prompt: 'The word "their" in "rather than their fundamental nature" (paragraph 4) refers to',
+        options: { A: "the techniques", B: "the defenders", C: "the users", D: "the supermarkets" },
+        answer: "A",
+        explanation: '"Their" refers to "the techniques": the defenders say the techniques have changed in scale and precision but not in their basic nature.',
+        evidence: { ref: "P4", quote: "the scale and precision of the techniques rather than their fundamental nature" },
+      },
+      {
+        id: "rd-m1-ae-q8",
+        type: "detail",
+        difficulty: 3,
+        prompt: "Which argument is made by defenders of the industry?",
+        options: {
+          A: "Designing to capture attention is not a new practice.",
+          B: "Platforms do not personalise what users see.",
+          C: "Users get little real value from online platforms.",
+          D: "Governments should regulate platform design.",
+        },
+        answer: "A",
+        explanation: "Defenders point to headlines, cliffhangers and supermarket layouts as older examples of attention-seeking design.",
+        evidence: { ref: "P4", quote: "attention-seeking design is hardly new" },
+      },
+      {
+        id: "rd-m1-ae-q9",
+        type: "organisation",
+        difficulty: 5,
+        prompt: "What is the function of paragraph 5 in relation to paragraph 4?",
+        options: {
+          A: "It challenges the defenders' claim that only the scale of the techniques has changed.",
+          B: "It agrees that television and online platforms work in the same way.",
+          C: "It introduces the regulatory solutions discussed later.",
+          D: "It summarises the critics' argument from paragraph 3.",
+        },
+        answer: "A",
+        explanation:
+          'Paragraph 4 ends with the defenders\' view that only scale and precision have changed. Paragraph 5 opens with "Yet" and argues that personalisation is a qualitative change.',
+        evidence: { ref: "P5", quote: "Yet scale and precision may be exactly what matters." },
+      },
+      {
+        id: "rd-m1-ae-q10",
+        type: "attitude",
+        difficulty: 4,
+        prompt: "Which best describes the writer's position?",
+        options: {
+          A: "Presents both sides but treats the issue as a matter of public concern",
+          B: "Dismisses the critics as exaggerating the problem",
+          C: "Calls for a complete ban on advertising-funded platforms",
+          D: "Shows no interest in the outcome of the debate",
+        },
+        answer: "A",
+        explanation:
+          "The writer reports critics and defenders fairly, leans towards the critics in paragraph 5, and concludes that attention has become a public issue. The writer never calls for a ban.",
+        evidence: { ref: "P6", quote: "has become a question not only of individual habit but of public concern" },
+      },
+    ],
+  },
+];

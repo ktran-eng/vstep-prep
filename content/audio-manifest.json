@@ -1,0 +1,556 @@
+{
+  "ls-m1-p1-airport": {
+    "file": "ls-m1-p1-airport.mp3",
+    "durationSeconds": 24.8,
+    "method": "windows_sapi_dev",
+    "voices": {
+      "Announcer": "Microsoft David"
+    },
+    "hash": "122b01079c33e2e9"
+  },
+  "ls-m1-p1-club": {
+    "file": "ls-m1-p1-club.mp3",
+    "durationSeconds": 22.8,
+    "method": "windows_sapi_dev",
+    "voices": {
+      "Teacher": "Microsoft Zira"
+    },
+    "hash": "991bd8019ba3bdd1"
+  },
+  "ls-m1-p1-dentist": {
+    "file": "ls-m1-p1-dentist.mp3",
+    "durationSeconds": 27.7,
+    "method": "windows_sapi_dev",
+    "voices": {
+      "Receptionist": "Microsoft Zira"
+    },
+    "hash": "0a6a8b68dd604b9b"
+  },
+  "ls-m1-p1-gym": {
+    "file": "ls-m1-p1-gym.mp3",
+    "durationSeconds": 28,
+    "method": "windows_sapi_dev",
+    "voices": {
+      "Announcer": "Microsoft Zira"
+    },
+    "hash": "9d7063dda64b7c74"
+  },
+  "ls-m1-p1-museum": {
+    "file": "ls-m1-p1-museum.mp3",
+    "durationSeconds": 24.8,
+    "method": "windows_sapi_dev",
+    "voices": {
+      "Guide": "Microsoft David"
+    },
+    "hash": "e76bc28228e360aa"
+  },
+  "ls-m1-p1-supermarket": {
+    "file": "ls-m1-p1-supermarket.mp3",
+    "durationSeconds": 26.2,
+    "method": "windows_sapi_dev",
+    "voices": {
+      "Announcer": "Microsoft David"
+    },
+    "hash": "b2e6bf8588bb3c13"
+  },
+  "ls-m1-p1-train": {
+    "file": "ls-m1-p1-train.mp3",
+    "durationSeconds": 28.1,
+    "method": "windows_sapi_dev",
+    "voices": {
+      "Announcer": "Microsoft Zira"
+    },
+    "hash": "abd564b77a07704b"
+  },
+  "ls-m1-p1-weather": {
+    "file": "ls-m1-p1-weather.mp3",
+    "durationSeconds": 25.5,
+    "method": "windows_sapi_dev",
+    "voices": {
+      "Presenter": "Microsoft Zira"
+    },
+    "hash": "9c4bd3d807a9290d"
+  },
+  "ls-m1-p2-advisor": {
+    "file": "ls-m1-p2-advisor.mp3",
+    "durationSeconds": 79.4,
+    "method": "windows_sapi_dev",
+    "voices": {
+      "Student": "Microsoft David",
+      "Advisor": "Microsoft Zira"
+    },
+    "hash": "ee5714aa700cf972"
+  },
+  "ls-m1-p2-office": {
+    "file": "ls-m1-p2-office.mp3",
+    "durationSeconds": 66.9,
+    "method": "windows_sapi_dev",
+    "voices": {
+      "Hung": "Microsoft David",
+      "Mai": "Microsoft Zira"
+    },
+    "hash": "a96147893a67d8bb"
+  },
+  "ls-m1-p2-trip": {
+    "file": "ls-m1-p2-trip.mp3",
+    "durationSeconds": 70.9,
+    "method": "windows_sapi_dev",
+    "voices": {
+      "Linh": "Microsoft Zira",
+      "Nam": "Microsoft David"
+    },
+    "hash": "6eef2e1dfee33a73"
+  },
+  "ls-m1-p3-bilingual": {
+    "file": "ls-m1-p3-bilingual.mp3",
+    "durationSeconds": 129.2,
+    "method": "windows_sapi_dev",
+    "voices": {
+      "Speaker": "Microsoft Zira"
+    },
+    "hash": "ffc473d58178b3f5"
+  },
+  "ls-m1-p3-coffee": {
+    "file": "ls-m1-p3-coffee.mp3",
+    "durationSeconds": 102.7,
+    "method": "windows_sapi_dev",
+    "voices": {
+      "Lecturer": "Microsoft David"
+    },
+    "hash": "8c0926121eac8146"
+  },
+  "ls-m1-p3-noise": {
+    "file": "ls-m1-p3-noise.mp3",
+    "durationSeconds": 112,
+    "method": "windows_sapi_dev",
+    "voices": {
+      "Lecturer": "Microsoft David"
+    },
+    "hash": "5b72635798c092c2"
+  },
+  "ls-m2-p1-bus": {
+    "file": "ls-m2-p1-bus.mp3",
+    "durationSeconds": 23,
+    "method": "windows_sapi_dev",
+    "voices": {
+      "Announcer": "Microsoft David"
+    },
+    "hash": "53155a43179b6cdd"
+  },
+  "ls-m2-p1-campus": {
+    "file": "ls-m2-p1-campus.mp3",
+    "durationSeconds": 27.4,
+    "method": "windows_sapi_dev",
+    "voices": {
+      "Announcer": "Microsoft David"
+    },
+    "hash": "1f2514b9400067da"
+  },
+  "ls-m2-p1-cinema": {
+    "file": "ls-m2-p1-cinema.mp3",
+    "durationSeconds": 25,
+    "method": "windows_sapi_dev",
+    "voices": {
+      "Announcer": "Microsoft Zira"
+    },
+    "hash": "91f13bfce2068141"
+  },
+  "ls-m2-p1-concert": {
+    "file": "ls-m2-p1-concert.mp3",
+    "durationSeconds": 24.6,
+    "method": "windows_sapi_dev",
+    "voices": {
+      "Presenter": "Microsoft David"
+    },
+    "hash": "b415924018a0d63b"
+  },
+  "ls-m2-p1-ferry": {
+    "file": "ls-m2-p1-ferry.mp3",
+    "durationSeconds": 22.8,
+    "method": "windows_sapi_dev",
+    "voices": {
+      "Announcer": "Microsoft Zira"
+    },
+    "hash": "9317602ee55eb83f"
+  },
+  "ls-m2-p1-hotel": {
+    "file": "ls-m2-p1-hotel.mp3",
+    "durationSeconds": 20.8,
+    "method": "windows_sapi_dev",
+    "voices": {
+      "Receptionist": "Microsoft Zira"
+    },
+    "hash": "60a76560e8d508a9"
+  },
+  "ls-m2-p1-library": {
+    "file": "ls-m2-p1-library.mp3",
+    "durationSeconds": 25,
+    "method": "windows_sapi_dev",
+    "voices": {
+      "Announcer": "Microsoft Zira"
+    },
+    "hash": "27ae2e78c9d70b55"
+  },
+  "ls-m2-p1-pharmacy": {
+    "file": "ls-m2-p1-pharmacy.mp3",
+    "durationSeconds": 23.6,
+    "method": "windows_sapi_dev",
+    "voices": {
+      "Pharmacist": "Microsoft David"
+    },
+    "hash": "0cde716e870d1915"
+  },
+  "ls-m2-p2-flat": {
+    "file": "ls-m2-p2-flat.mp3",
+    "durationSeconds": 71.7,
+    "method": "windows_sapi_dev",
+    "voices": {
+      "Quang": "Microsoft David",
+      "Thao": "Microsoft Zira"
+    },
+    "hash": "6db7a6a4ba9343e5"
+  },
+  "ls-m2-p2-project": {
+    "file": "ls-m2-p2-project.mp3",
+    "durationSeconds": 67.9,
+    "method": "windows_sapi_dev",
+    "voices": {
+      "Mai": "Microsoft Zira",
+      "Tuan": "Microsoft David"
+    },
+    "hash": "31f8f2b1f4516ff0"
+  },
+  "ls-m2-p2-volunteer": {
+    "file": "ls-m2-p2-volunteer.mp3",
+    "durationSeconds": 76.3,
+    "method": "windows_sapi_dev",
+    "voices": {
+      "Lan": "Microsoft Zira",
+      "Duc": "Microsoft David"
+    },
+    "hash": "dba10304ff9f75bb"
+  },
+  "ls-m2-p3-cities": {
+    "file": "ls-m2-p3-cities.mp3",
+    "durationSeconds": 106.9,
+    "method": "windows_sapi_dev",
+    "voices": {
+      "Speaker": "Microsoft Zira"
+    },
+    "hash": "9fb9dbfd3179e373"
+  },
+  "ls-m2-p3-mangroves": {
+    "file": "ls-m2-p3-mangroves.mp3",
+    "durationSeconds": 119.5,
+    "method": "windows_sapi_dev",
+    "voices": {
+      "Lecturer": "Microsoft David"
+    },
+    "hash": "452a71f54b4f8a97"
+  },
+  "ls-m2-p3-music": {
+    "file": "ls-m2-p3-music.mp3",
+    "durationSeconds": 98.4,
+    "method": "windows_sapi_dev",
+    "voices": {
+      "Speaker": "Microsoft Zira"
+    },
+    "hash": "2f1155d90b64d34f"
+  },
+  "ls-m3-p1-bank": {
+    "file": "ls-m3-p1-bank.mp3",
+    "durationSeconds": 22.7,
+    "method": "windows_sapi_dev",
+    "voices": {
+      "Announcer": "Microsoft Zira"
+    },
+    "hash": "8d2ce6ab154f88fa"
+  },
+  "ls-m3-p1-course": {
+    "file": "ls-m3-p1-course.mp3",
+    "durationSeconds": 25.3,
+    "method": "windows_sapi_dev",
+    "voices": {
+      "Announcer": "Microsoft David"
+    },
+    "hash": "400625346dc06c84"
+  },
+  "ls-m3-p1-market": {
+    "file": "ls-m3-p1-market.mp3",
+    "durationSeconds": 20.5,
+    "method": "windows_sapi_dev",
+    "voices": {
+      "Presenter": "Microsoft Zira"
+    },
+    "hash": "a6fbcde96ba1d1d5"
+  },
+  "ls-m3-p1-office": {
+    "file": "ls-m3-p1-office.mp3",
+    "durationSeconds": 22.3,
+    "method": "windows_sapi_dev",
+    "voices": {
+      "Manager": "Microsoft Zira"
+    },
+    "hash": "62956f6e03b63049"
+  },
+  "ls-m3-p1-repair": {
+    "file": "ls-m3-p1-repair.mp3",
+    "durationSeconds": 25.4,
+    "method": "windows_sapi_dev",
+    "voices": {
+      "Technician": "Microsoft David"
+    },
+    "hash": "3b57748e8a8737a4"
+  },
+  "ls-m3-p1-restaurant": {
+    "file": "ls-m3-p1-restaurant.mp3",
+    "durationSeconds": 23.6,
+    "method": "windows_sapi_dev",
+    "voices": {
+      "Waiter": "Microsoft David"
+    },
+    "hash": "f81d04fdef689b65"
+  },
+  "ls-m3-p1-sports": {
+    "file": "ls-m3-p1-sports.mp3",
+    "durationSeconds": 24.9,
+    "method": "windows_sapi_dev",
+    "voices": {
+      "Announcer": "Microsoft Zira"
+    },
+    "hash": "92544d8c230f9dd9"
+  },
+  "ls-m3-p1-zoo": {
+    "file": "ls-m3-p1-zoo.mp3",
+    "durationSeconds": 25.2,
+    "method": "windows_sapi_dev",
+    "voices": {
+      "Announcer": "Microsoft David"
+    },
+    "hash": "33becca905d76ac1"
+  },
+  "ls-m3-p2-laptop": {
+    "file": "ls-m3-p2-laptop.mp3",
+    "durationSeconds": 67.4,
+    "method": "windows_sapi_dev",
+    "voices": {
+      "Customer": "Microsoft Zira",
+      "Assistant": "Microsoft David"
+    },
+    "hash": "81c3fd332acb88d0"
+  },
+  "ls-m3-p2-neighbours": {
+    "file": "ls-m3-p2-neighbours.mp3",
+    "durationSeconds": 59.2,
+    "method": "windows_sapi_dev",
+    "voices": {
+      "Binh": "Microsoft David",
+      "Chi": "Microsoft Zira"
+    },
+    "hash": "36d9104ff1f15e77"
+  },
+  "ls-m3-p2-presentation": {
+    "file": "ls-m3-p2-presentation.mp3",
+    "durationSeconds": 64.7,
+    "method": "windows_sapi_dev",
+    "voices": {
+      "Nga": "Microsoft Zira",
+      "Khanh": "Microsoft David"
+    },
+    "hash": "0613fcd30f5838d9"
+  },
+  "ls-m3-p3-gig": {
+    "file": "ls-m3-p3-gig.mp3",
+    "durationSeconds": 105.3,
+    "method": "windows_sapi_dev",
+    "voices": {
+      "Speaker": "Microsoft David"
+    },
+    "hash": "95b7e010918b66e7"
+  },
+  "ls-m3-p3-memory": {
+    "file": "ls-m3-p3-memory.mp3",
+    "durationSeconds": 107.7,
+    "method": "windows_sapi_dev",
+    "voices": {
+      "Lecturer": "Microsoft Zira"
+    },
+    "hash": "667f1aee53bcb060"
+  },
+  "ls-m3-p3-plastic": {
+    "file": "ls-m3-p3-plastic.mp3",
+    "durationSeconds": 96.2,
+    "method": "windows_sapi_dev",
+    "voices": {
+      "Speaker": "Microsoft David"
+    },
+    "hash": "7d5fb6a4269e6bd5"
+  },
+  "ls-p-b1-a1": {
+    "file": "ls-p-b1-a1.mp3",
+    "durationSeconds": 21.2,
+    "method": "windows_sapi_dev",
+    "voices": {
+      "Announcer": "Microsoft Zira"
+    },
+    "hash": "6c840d30a4105bd2"
+  },
+  "ls-p-b1-a2": {
+    "file": "ls-p-b1-a2.mp3",
+    "durationSeconds": 18.5,
+    "method": "windows_sapi_dev",
+    "voices": {
+      "Announcer": "Microsoft David"
+    },
+    "hash": "a8d6eb6a66cb8a5a"
+  },
+  "ls-p-b1-a3": {
+    "file": "ls-p-b1-a3.mp3",
+    "durationSeconds": 16.5,
+    "method": "windows_sapi_dev",
+    "voices": {
+      "Announcer": "Microsoft Zira"
+    },
+    "hash": "38c47883ceb42860"
+  },
+  "ls-p-b1-a4": {
+    "file": "ls-p-b1-a4.mp3",
+    "durationSeconds": 21.4,
+    "method": "windows_sapi_dev",
+    "voices": {
+      "Announcer": "Microsoft David"
+    },
+    "hash": "ca3a34f5ec39cace"
+  },
+  "ls-p-b1-a5": {
+    "file": "ls-p-b1-a5.mp3",
+    "durationSeconds": 22.5,
+    "method": "windows_sapi_dev",
+    "voices": {
+      "Announcer": "Microsoft David"
+    },
+    "hash": "7e103404fbb166da"
+  },
+  "ls-p-b1-a6": {
+    "file": "ls-p-b1-a6.mp3",
+    "durationSeconds": 18.9,
+    "method": "windows_sapi_dev",
+    "voices": {
+      "Announcer": "Microsoft Zira"
+    },
+    "hash": "402cf8ff0ed0736a"
+  },
+  "ls-p-b1-a7": {
+    "file": "ls-p-b1-a7.mp3",
+    "durationSeconds": 20,
+    "method": "windows_sapi_dev",
+    "voices": {
+      "Announcer": "Microsoft David"
+    },
+    "hash": "9b3090d50cbe5e91"
+  },
+  "ls-p-b1-a8": {
+    "file": "ls-p-b1-a8.mp3",
+    "durationSeconds": 20.7,
+    "method": "windows_sapi_dev",
+    "voices": {
+      "Announcer": "Microsoft Zira"
+    },
+    "hash": "d9a9c06a8d421477"
+  },
+  "ls-p-b1-c1": {
+    "file": "ls-p-b1-c1.mp3",
+    "durationSeconds": 50.7,
+    "method": "windows_sapi_dev",
+    "voices": {
+      "Hoa": "Microsoft Zira",
+      "Tung": "Microsoft David"
+    },
+    "hash": "60bf094658027572"
+  },
+  "ls-p-b1-c2": {
+    "file": "ls-p-b1-c2.mp3",
+    "durationSeconds": 55,
+    "method": "windows_sapi_dev",
+    "voices": {
+      "Doctor": "Microsoft David",
+      "Patient": "Microsoft Zira"
+    },
+    "hash": "653df7f0f85f5506"
+  },
+  "ls-p-b2-c1": {
+    "file": "ls-p-b2-c1.mp3",
+    "durationSeconds": 61,
+    "method": "windows_sapi_dev",
+    "voices": {
+      "An": "Microsoft Zira",
+      "Khoa": "Microsoft David"
+    },
+    "hash": "6b55fc9a57b3feb6"
+  },
+  "ls-p-b2-c2": {
+    "file": "ls-p-b2-c2.mp3",
+    "durationSeconds": 58.4,
+    "method": "windows_sapi_dev",
+    "voices": {
+      "Manager": "Microsoft Zira",
+      "Long": "Microsoft David"
+    },
+    "hash": "1c387d6a84257892"
+  },
+  "ls-p-b2-t1": {
+    "file": "ls-p-b2-t1.mp3",
+    "durationSeconds": 70.1,
+    "method": "windows_sapi_dev",
+    "voices": {
+      "Speaker": "Microsoft Zira"
+    },
+    "hash": "31ed4278223c0245"
+  },
+  "ls-p-b2-t2": {
+    "file": "ls-p-b2-t2.mp3",
+    "durationSeconds": 73,
+    "method": "windows_sapi_dev",
+    "voices": {
+      "Speaker": "Microsoft David"
+    },
+    "hash": "bc8987934c3f4afc"
+  },
+  "ls-p-c1-c1": {
+    "file": "ls-p-c1-c1.mp3",
+    "durationSeconds": 69,
+    "method": "windows_sapi_dev",
+    "voices": {
+      "Vy": "Microsoft Zira",
+      "Dung": "Microsoft David"
+    },
+    "hash": "8749cf8eaa87d0ed"
+  },
+  "ls-p-c1-t1": {
+    "file": "ls-p-c1-t1.mp3",
+    "durationSeconds": 95,
+    "method": "windows_sapi_dev",
+    "voices": {
+      "Lecturer": "Microsoft David"
+    },
+    "hash": "575006c4b01395f6"
+  },
+  "ls-p-c1-t2": {
+    "file": "ls-p-c1-t2.mp3",
+    "durationSeconds": 91.9,
+    "method": "windows_sapi_dev",
+    "voices": {
+      "Speaker": "Microsoft Zira"
+    },
+    "hash": "d001dbba8f2e7e36"
+  },
+  "ls-p-c1-t3": {
+    "file": "ls-p-c1-t3.mp3",
+    "durationSeconds": 86.2,
+    "method": "windows_sapi_dev",
+    "voices": {
+      "Lecturer": "Microsoft Zira"
+    },
+    "hash": "86f50b82d89196ab"
+  }
+}

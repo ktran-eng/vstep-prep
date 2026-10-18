@@ -1,0 +1,164 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------------------
+   Design tokens. Components use only these semantic tokens, so light/dark
+   themes swap by redefining variables (no per-component dark: variants).
+   --------------------------------------------------------------------------- */
+:root {
+  --bg: #f6f7f9;
+  --surface: #ffffff;
+  --surface-2: #f0f2f5;
+  --border: #dde1e7;
+  --border-strong: #b8bfca;
+  --text: #16191f;
+  --muted: #545c69; /* 7.1:1 on white */
+  --primary: #1d4ed8; /* 6.7:1 on white */
+  --primary-hover: #1e40af;
+  --primary-fg: #ffffff;
+  --primary-soft: #e8efff;
+  --success: #15803d;
+  --success-soft: #e7f6ec;
+  --warning: #a15c07;
+  --warning-soft: #fdf3e2;
+  --danger: #b91c1c;
+  --danger-soft: #fdecec;
+  --focus: #2563eb;
+  --skill-listening: #7c3aed;
+  --skill-reading: #0f766e;
+  --skill-writing: #c2410c;
+  --skill-speaking: #be185d;
+  --shadow: 0 1px 2px rgb(16 24 40 / 0.06), 0 1px 3px rgb(16 24 40 / 0.08);
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  --bg: #0f1216;
+  --surface: #171b21;
+  --surface-2: #1f242c;
+  --border: #2c333d;
+  --border-strong: #46505e;
+  --text: #e8ebf0;
+  --muted: #a3acb9;
+  --primary: #7aa2ff;
+  --primary-hover: #9bb9ff;
+  --primary-fg: #0b1220;
+  --primary-soft: #1b2a4a;
+  --success: #4ade80;
+  --success-soft: #12301f;
+  --warning: #fbbf24;
+  --warning-soft: #33270d;
+  --danger: #f87171;
+  --danger-soft: #3a1717;
+  --focus: #93b4ff;
+  --skill-listening: #b794f6;
+  --skill-reading: #5eead4;
+  --skill-writing: #fdba74;
+  --skill-speaking: #f9a8d4;
+  --shadow: 0 1px 2px rgb(0 0 0 / 0.4);
+  color-scheme: dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root[data-theme="system"] {
+    --bg: #0f1216;
+    --surface: #171b21;
+    --surface-2: #1f242c;
+    --border: #2c333d;
+    --border-strong: #46505e;
+    --text: #e8ebf0;
+    --muted: #a3acb9;
+    --primary: #7aa2ff;
+    --primary-hover: #9bb9ff;
+    --primary-fg: #0b1220;
+    --primary-soft: #1b2a4a;
+    --success: #4ade80;
+    --success-soft: #12301f;
+    --warning: #fbbf24;
+    --warning-soft: #33270d;
+    --danger: #f87171;
+    --danger-soft: #3a1717;
+    --focus: #93b4ff;
+    --skill-listening: #b794f6;
+    --skill-reading: #5eead4;
+    --skill-writing: #fdba74;
+    --skill-speaking: #f9a8d4;
+    --shadow: 0 1px 2px rgb(0 0 0 / 0.4);
+    color-scheme: dark;
+  }
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-text: var(--text);
+  --color-muted: var(--muted);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-fg: var(--primary-fg);
+  --color-primary-soft: var(--primary-soft);
+  --color-success: var(--success);
+  --color-success-soft: var(--success-soft);
+  --color-warning: var(--warning);
+  --color-warning-soft: var(--warning-soft);
+  --color-danger: var(--danger);
+  --color-danger-soft: var(--danger-soft);
+  --color-listening: var(--skill-listening);
+  --color-reading: var(--skill-reading);
+  --color-writing: var(--skill-writing);
+  --color-speaking: var(--skill-speaking);
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  --font-serif: Georgia, "Times New Roman", serif;
+  --radius-card: 0.75rem;
+  --shadow-card: var(--shadow);
+}
+
+html {
+  background: var(--bg);
+  color: var(--text);
+  -webkit-text-size-adjust: 100%;
+}
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  line-height: 1.55;
+}
+
+/* Visible focus for keyboard users on every interactive element. */
+:where(a, button, input, select, textarea, [tabindex], summary):focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.prose-passage p {
+  margin-bottom: 0.9rem;
+}
+.reading-text {
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  line-height: 1.75;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.sr-only-focusable:not(:focus) {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}

@@ -1,0 +1,155 @@
+import type { BlueprintInput } from "@/domain/content-schema";
+
+const mock = (n: number, extra: { listening: string[]; reading: string[]; writing: string[]; speaking: string[] }): BlueprintInput => ({
+  id: `mock-${n}`,
+  name: `Đề thi thử VSTEP.3–5 số ${n}`,
+  description:
+    "Đề thi đầy đủ 4 kỹ năng theo định dạng QĐ 729/QĐ-BGDĐT: Nghe 35 câu (~40 phút), Đọc 4 bài/40 câu (60 phút), Viết 2 bài (60 phút), Nói 3 phần (12 phút). Độ khó tăng dần từ B1 đến C1 như đề thật. Nội dung gốc, không phải đề thi chính thức.",
+  kind: "mock",
+  targetLevel: "B1-C1",
+  sections: [
+    { skill: "listening", timeLimitMinutes: 40, items: extra.listening },
+    { skill: "reading", timeLimitMinutes: 60, items: extra.reading },
+    { skill: "writing", timeLimitMinutes: 60, items: extra.writing },
+    { skill: "speaking", timeLimitMinutes: 12, items: extra.speaking },
+  ],
+});
+
+const m1Listening = [
+  "ls-m1-p1-train",
+  "ls-m1-p1-dentist",
+  "ls-m1-p1-supermarket",
+  "ls-m1-p1-weather",
+  "ls-m1-p1-museum",
+  "ls-m1-p1-club",
+  "ls-m1-p1-airport",
+  "ls-m1-p1-gym",
+  "ls-m1-p2-trip",
+  "ls-m1-p2-advisor",
+  "ls-m1-p2-office",
+  "ls-m1-p3-coffee",
+  "ls-m1-p3-bilingual",
+  "ls-m1-p3-noise",
+];
+const m2Listening = [
+  "ls-m2-p1-library",
+  "ls-m2-p1-pharmacy",
+  "ls-m2-p1-cinema",
+  "ls-m2-p1-bus",
+  "ls-m2-p1-hotel",
+  "ls-m2-p1-campus",
+  "ls-m2-p1-ferry",
+  "ls-m2-p1-concert",
+  "ls-m2-p2-flat",
+  "ls-m2-p2-volunteer",
+  "ls-m2-p2-project",
+  "ls-m2-p3-music",
+  "ls-m2-p3-mangroves",
+  "ls-m2-p3-cities",
+];
+const m3Listening = [
+  "ls-m3-p1-bank",
+  "ls-m3-p1-zoo",
+  "ls-m3-p1-restaurant",
+  "ls-m3-p1-office",
+  "ls-m3-p1-sports",
+  "ls-m3-p1-repair",
+  "ls-m3-p1-course",
+  "ls-m3-p1-market",
+  "ls-m3-p2-laptop",
+  "ls-m3-p2-presentation",
+  "ls-m3-p2-neighbours",
+  "ls-m3-p3-plastic",
+  "ls-m3-p3-memory",
+  "ls-m3-p3-gig",
+];
+
+export const blueprints: BlueprintInput[] = [
+  mock(1, {
+    listening: m1Listening,
+    reading: ["rd-m1-night-market", "rd-m1-names-faces", "rd-m1-rooftop-farms", "rd-m1-attention-economy"],
+    writing: ["wr-m1-letter-job", "wr-m1-essay-tuition"],
+    speaking: ["sp-m1-p1", "sp-m1-p2", "sp-m1-p3"],
+  }),
+  mock(2, {
+    listening: m2Listening,
+    reading: ["rd-m2-library", "rd-m2-teen-sleep", "rd-m2-e-motorbikes", "rd-m2-translation"],
+    writing: ["wr-m2-letter-hotel", "wr-m2-essay-socialmedia"],
+    speaking: ["sp-m2-p1", "sp-m2-p2", "sp-m2-p3"],
+  }),
+  mock(3, {
+    listening: m3Listening,
+    reading: ["rd-m3-baker", "rd-m3-coral", "rd-m3-remote-work", "rd-m3-citizen-science"],
+    writing: ["wr-m3-letter-visit", "wr-m3-essay-migration"],
+    speaking: ["sp-m3-p1", "sp-m3-p2", "sp-m3-p3"],
+  }),
+  /* -------------------------- Reading practice -------------------------- */
+  ...(["B1", "B2", "C1"] as const).flatMap((lvl) =>
+    [1, 2].map(
+      (n): BlueprintInput => ({
+        id: `practice-reading-${lvl.toLowerCase()}-${n}`,
+        name: `Reading ${lvl} · Bài luyện ${n}`,
+        description: `Một bài đọc trình độ ${lvl} kèm câu hỏi và giải thích chi tiết.`,
+        kind: "practice",
+        skill: "reading",
+        targetLevel: lvl,
+        sections: [{ skill: "reading", timeLimitMinutes: 15, items: [`rd-p-${lvl.toLowerCase()}-${n}`] }],
+      }),
+    ),
+  ),
+  /* ------------------------- Listening practice ------------------------- */
+  {
+    id: "practice-listening-b1-1",
+    name: "Listening B1 · Bài luyện 1",
+    description: "4 thông báo ngắn (Part 1) và 1 hội thoại (Part 2).",
+    kind: "practice",
+    skill: "listening",
+    targetLevel: "B1",
+    sections: [{ skill: "listening", timeLimitMinutes: 15, items: ["ls-p-b1-a1", "ls-p-b1-a2", "ls-p-b1-a3", "ls-p-b1-a4", "ls-p-b1-c1"] }],
+  },
+  {
+    id: "practice-listening-b1-2",
+    name: "Listening B1 · Bài luyện 2",
+    description: "4 thông báo ngắn (Part 1) và 1 hội thoại (Part 2).",
+    kind: "practice",
+    skill: "listening",
+    targetLevel: "B1",
+    sections: [{ skill: "listening", timeLimitMinutes: 15, items: ["ls-p-b1-a5", "ls-p-b1-a6", "ls-p-b1-a7", "ls-p-b1-a8", "ls-p-b1-c2"] }],
+  },
+  {
+    id: "practice-listening-b2-1",
+    name: "Listening B2 · Bài luyện 1",
+    description: "1 hội thoại (Part 2) và 1 bài nói (Part 3).",
+    kind: "practice",
+    skill: "listening",
+    targetLevel: "B2",
+    sections: [{ skill: "listening", timeLimitMinutes: 15, items: ["ls-p-b2-c1", "ls-p-b2-t1"] }],
+  },
+  {
+    id: "practice-listening-b2-2",
+    name: "Listening B2 · Bài luyện 2",
+    description: "1 hội thoại (Part 2) và 1 bài nói (Part 3).",
+    kind: "practice",
+    skill: "listening",
+    targetLevel: "B2",
+    sections: [{ skill: "listening", timeLimitMinutes: 15, items: ["ls-p-b2-c2", "ls-p-b2-t2"] }],
+  },
+  {
+    id: "practice-listening-c1-1",
+    name: "Listening C1 · Bài luyện 1",
+    description: "2 bài giảng/bài nói học thuật (Part 3).",
+    kind: "practice",
+    skill: "listening",
+    targetLevel: "C1",
+    sections: [{ skill: "listening", timeLimitMinutes: 15, items: ["ls-p-c1-t1", "ls-p-c1-t2"] }],
+  },
+  {
+    id: "practice-listening-c1-2",
+    name: "Listening C1 · Bài luyện 2",
+    description: "1 hội thoại (Part 2) và 1 bài giảng (Part 3).",
+    kind: "practice",
+    skill: "listening",
+    targetLevel: "C1",
+    sections: [{ skill: "listening", timeLimitMinutes: 15, items: ["ls-p-c1-c1", "ls-p-c1-t3"] }],
+  },
+];
