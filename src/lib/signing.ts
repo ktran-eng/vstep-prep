@@ -24,12 +24,12 @@ export async function sign(value: string, secret = getSessionSecret()): Promise<
 }
 
 /** Returns the original value if the signature is valid, otherwise null. Constant-time comparison. */
-export async function verify(signed: string | undefined | null, secret = getSessionSecret()): Promise<string | null> {
+export async function verify(signed: string | undefined | null, secret?: string): Promise<string | null> {
   if (!signed) return null;
   const i = signed.lastIndexOf(".");
   if (i <= 0) return null;
   const value = signed.slice(0, i);
-  const expected = await sign(value, secret);
+  const expected = await sign(value, secret ?? getSessionSecret());
   if (expected.length !== signed.length) return null;
   let diff = 0;
   for (let j = 0; j < expected.length; j++) diff |= expected.charCodeAt(j) ^ signed.charCodeAt(j);

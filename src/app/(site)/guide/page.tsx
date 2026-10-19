@@ -1,13 +1,14 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { getActiveSpec } from "@/server/ops";
+import { DEFAULT_EXAM_SPEC } from "@/domain/spec";
 import { Badge, Card, Notice, PageHeader } from "@/components/ui";
 
 export const metadata: Metadata = { title: "Hướng dẫn kỳ thi VSTEP.3–5" };
 export const dynamic = "force-dynamic";
 
 export default async function GuidePage() {
-  const spec = await getActiveSpec();
+  const spec = await getActiveSpec().catch(() => DEFAULT_EXAM_SPEC);
   return (
     <>
       <PageHeader

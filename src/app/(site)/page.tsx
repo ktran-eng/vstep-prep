@@ -70,9 +70,6 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
           ))}
         </div>
       </section>
-      <Notice tone="warning" className="mt-6">
-        Đây là nền tảng luyện thi độc lập. Toàn bộ đề là nội dung gốc mô phỏng định dạng VSTEP, không phải đề thi chính thức, và không có liên kết với Bộ GD&ĐT hay các đơn vị tổ chức thi. Kết quả luyện tập không đảm bảo kết quả thi thật.
-      </Notice>
     </>
   );
 }
