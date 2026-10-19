@@ -8,7 +8,7 @@ Any Node.js host that runs Next.js works. These steps assume **Vercel + Neon (or
 |---|---|---|
 | `DATABASE_URL` | yes | Postgres 14+. For Neon, use the **pooled** connection string with `sslmode=require` |
 | `SESSION_SECRET` | recommended | ≥ 32 random chars. If unset, a key derived from `DATABASE_URL` is used. Changing it signs learners out (they sign in again with their name) |
-| `ADMIN_PASSWORD` | optional | ≥ 12 chars. Without it the admin area stays locked; the learner site is unaffected |
+| `ADMIN_PASSWORD` | optional | ≥ 12 chars. Enables `/admin`; without it the admin area returns 404 |
 | `CRON_SECRET` | yes | Protects `/api/cron/maintenance` |
 | `ANTHROPIC_API_KEY`, `ANTHROPIC_MODEL` | optional | Writing/Speaking feedback. Without the key, grading is shown as "unavailable" |
 | `OPENAI_API_KEY`, `OPENAI_TRANSCRIBE_MODEL`, `OPENAI_TTS_MODEL` | optional | Speech-to-text for Speaking; production TTS for listening audio |

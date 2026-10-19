@@ -1,6 +1,6 @@
 import "server-only";
 import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { createHash, timingSafeEqual } from "node:crypto";
 import { ADMIN_COOKIE, sign, verify } from "@/lib/signing";
 
@@ -40,8 +40,9 @@ export async function isAdmin(): Promise<boolean> {
   return Number(value.slice(6)) > Date.now();
 }
 
-/** Server-side guard for every admin page and action. */
+/** Server-side guard for every admin page and action. Without ADMIN_PASSWORD the admin area does not exist. */
 export async function requireAdmin(): Promise<string> {
+  if (!adminConfigured()) notFound();
   if (!(await isAdmin())) redirect("/admin/login");
   return "admin";
 }

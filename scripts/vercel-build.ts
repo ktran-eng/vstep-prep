@@ -10,8 +10,6 @@ const run = (cmd: string) => execSync(cmd, { stdio: "inherit" });
 const missing: string[] = [];
 if (!process.env.DATABASE_URL) missing.push("DATABASE_URL (Neon pooled connection string)");
 if (process.env.SESSION_SECRET && process.env.SESSION_SECRET.length < 32) missing.push("SESSION_SECRET is set but shorter than 32 characters");
-if ((process.env.ADMIN_PASSWORD ?? "").length < 12) console.warn("ADMIN_PASSWORD is not set (>= 12 chars): the admin area stays locked.");
-
 const production = process.env.VERCEL_ENV === "production";
 if (missing.length) {
   const msg = `Missing environment variables:\n  - ${missing.join("\n  - ")}\nSet them in Vercel → Project → Settings → Environment Variables, then redeploy.`;
