@@ -7,8 +7,8 @@ Any Node.js host that runs Next.js works. These steps assume **Vercel + Neon (or
 | Variable | Required | Notes |
 |---|---|---|
 | `DATABASE_URL` | yes | Postgres 14+. For Neon, use the **pooled** connection string with `sslmode=require` |
-| `SESSION_SECRET` | yes | ≥ 32 random chars. Rotating it invalidates every learner cookie, so learners lose access to their history |
-| `ADMIN_PASSWORD` | yes | ≥ 12 chars; use a long random passphrase |
+| `SESSION_SECRET` | recommended | ≥ 32 random chars. If unset, a key derived from `DATABASE_URL` is used. Changing it signs learners out (they sign in again with their name) |
+| `ADMIN_PASSWORD` | optional | ≥ 12 chars. Without it the admin area stays locked; the learner site is unaffected |
 | `CRON_SECRET` | yes | Protects `/api/cron/maintenance` |
 | `ANTHROPIC_API_KEY`, `ANTHROPIC_MODEL` | optional | Writing/Speaking feedback. Without the key, grading is shown as "unavailable" |
 | `OPENAI_API_KEY`, `OPENAI_TRANSCRIBE_MODEL`, `OPENAI_TTS_MODEL` | optional | Speech-to-text for Speaking; production TTS for listening audio |
@@ -57,7 +57,7 @@ or replace the files with studio recordings, and update `content/audio-manifest.
 ## 4. Deploy (Vercel)
 
 1. Import the repository and set the environment variables for Production (and Preview, with a separate database).
-2. `vercel.json` pins `"framework": "nextjs"` and the build command `npm run vercel-build` ([scripts/vercel-build.ts](../scripts/vercel-build.ts)). It fails a production build that lacks `DATABASE_URL`, `SESSION_SECRET` or `ADMIN_PASSWORD`, then runs `db:migrate` and `db:seed` (both idempotent) before `next build`, so the database is always ready for the new code. If the project was first imported with another preset, the earlier deployment shows Vercel's own `404 NOT_FOUND` page; redeploy after pulling this file. Also check that **Settings → Build and Deployment → Framework Preset** reads Next.js.
+2. `vercel.json` pins `"framework": "nextjs"` and the build command `npm run vercel-build` ([scripts/vercel-build.ts](../scripts/vercel-build.ts)). It fails a production build that lacks `DATABASE_URL`, then runs `db:migrate` and `db:seed` (both idempotent) before `next build`, so the database is always ready for the new code. If the project was first imported with another preset, the earlier deployment shows Vercel's own `404 NOT_FOUND` page; redeploy after pulling this file. Also check that **Settings → Build and Deployment → Framework Preset** reads Next.js.
 3. `vercel.json` registers the daily retention cron. Vercel sends `Authorization: Bearer $CRON_SECRET` automatically.
 4. Server actions accept up to 12 MB request bodies (configured in `next.config.ts`) for speaking uploads. Make sure your host's request limit is at least that, and on Vercel use a plan whose function body limit allows it.
 5. HTTPS and the domain are configured in the host dashboard. The app sets `Secure` cookies in production.

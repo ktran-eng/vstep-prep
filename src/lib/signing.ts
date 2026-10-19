@@ -11,10 +11,16 @@ async function key(secret: string) {
   return crypto.subtle.importKey("raw", enc.encode(secret), { name: "HMAC", hash: "SHA-256" }, false, ["sign"]);
 }
 
+/**
+ * SESSION_SECRET if set; otherwise a key derived from DATABASE_URL, which is already a server-only secret
+ * (anyone holding it could read the data the cookie protects). Changing the database password logs learners
+ * out, which only means typing their sign-in name again.
+ */
 export function getSessionSecret(): string {
   const s = process.env.SESSION_SECRET;
   if (s && s.length >= 32) return s;
-  if (process.env.NODE_ENV === "production") throw new Error("SESSION_SECRET (>= 32 chars) is required in production.");
+  if (process.env.DATABASE_URL) return `vstep-session-v1|${process.env.DATABASE_URL}`;
+  if (process.env.NODE_ENV === "production") throw new Error("SESSION_SECRET (>= 32 chars) or DATABASE_URL is required in production.");
   return "dev-only-insecure-session-secret-change-me";
 }
 

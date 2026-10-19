@@ -8,7 +8,7 @@ import { validateMcq } from "@/domain/content-validation";
 import type { Mcq } from "@/domain/content-schema";
 import { buildRecommendations } from "@/domain/recommendations";
 import { generateWeeklyPlan, weekStartOf } from "@/domain/study-plan";
-import { sign, verify } from "@/lib/signing";
+import { getSessionSecret, sign, verify } from "@/lib/signing";
 import { normaliseUsername, safeNextPath } from "@/domain/username";
 import { sniffAudio, validateRecording } from "@/server/audio-upload";
 
@@ -217,6 +217,21 @@ describe("security helpers", () => {
     expect(await verify(s.replace("abc", "abd"), "k".repeat(32))).toBeNull();
     expect(await verify(s, "x".repeat(32))).toBeNull();
     expect(await verify("garbage", "k".repeat(32))).toBeNull();
+  });
+  it("derives the session key from DATABASE_URL when SESSION_SECRET is unset", () => {
+    const saved = { s: process.env.SESSION_SECRET, d: process.env.DATABASE_URL };
+    try {
+      delete process.env.SESSION_SECRET;
+      process.env.DATABASE_URL = "postgres://u:p@host/db";
+      const a = getSessionSecret();
+      expect(a).toContain("postgres://u:p@host/db");
+      process.env.SESSION_SECRET = "s".repeat(32);
+      expect(getSessionSecret()).toBe("s".repeat(32));
+    } finally {
+      process.env.SESSION_SECRET = saved.s;
+      if (saved.d === undefined) delete process.env.DATABASE_URL;
+      else process.env.DATABASE_URL = saved.d;
+    }
   });
   it("sniffs audio formats and rejects disguised files", () => {
     const webm = Buffer.from([0x1a, 0x45, 0xdf, 0xa3, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
