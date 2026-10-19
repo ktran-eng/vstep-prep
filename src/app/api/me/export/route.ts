@@ -3,7 +3,7 @@ import { getDb } from "@/server/db";
 import * as t from "@/server/db/schema";
 import { readLearnerId } from "@/server/identity";
 
-/** Data portability: everything stored for this browser's learner id, as JSON (recordings referenced by id, not inlined). */
+/** Data portability: everything stored for the signed-in learner, as JSON (recordings referenced by id, not inlined). */
 export async function GET() {
   const learnerId = await readLearnerId();
   if (!learnerId) return new Response("Not found", { status: 404 });

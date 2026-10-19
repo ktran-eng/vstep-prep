@@ -8,6 +8,7 @@ import { useT } from "@/i18n/client";
 import { fmt } from "@/i18n/dict";
 import {
   advanceSectionAction,
+  selectSectionAction,
   getAttemptViewAction,
   registerPlayAction,
   saveAnswerAction,
@@ -53,7 +54,8 @@ export function ExamRunner({ initial, maxPlays }: { initial: AttemptView; maxPla
 
   const strict = view.attempt.mode === "exam";
   const section = view.snapshot.sections.find((s) => s.order === view.attempt.currentSection)!;
-  const isLast = section.order === view.snapshot.sections[view.snapshot.sections.length - 1]!.order;
+  // The final submit button appears when this is the only section still open.
+  const isLast = view.sections.filter((s) => !s.submittedAt).length <= 1;
   const group = section.groups[Math.min(groupIdx, section.groups.length - 1)]!;
 
   /* ------------------------------ timing ------------------------------ */
@@ -192,6 +194,22 @@ export function ExamRunner({ initial, maxPlays }: { initial: AttemptView; maxPla
     }
   }
 
+  /** Practice mode: open another unfinished section. Answers in the current one are kept and it stays open. */
+  async function jumpTo(order: number) {
+    setBusy(true);
+    await flush();
+    await writingFlush.current?.();
+    const r = await selectSectionAction({ attemptId: view.attempt.id, sectionOrder: order });
+    setBusy(false);
+    if (!r.ok) {
+      setNotice(r.error);
+      return;
+    }
+    setNotice(null);
+    await refresh();
+    window.scrollTo({ top: 0 });
+  }
+
 
   /* -------------------------------- render -------------------------------- */
   return (
@@ -200,21 +218,30 @@ export function ExamRunner({ initial, maxPlays }: { initial: AttemptView; maxPla
         <div className="mx-auto flex max-w-7xl flex-wrap items-center gap-x-4 gap-y-2 px-4 py-2">
           <div className="min-w-0 flex-1">
             <p className="truncate text-sm font-semibold">{view.snapshot.blueprint.name}</p>
-            <ol className="mt-1 flex flex-wrap gap-1 text-xs" aria-label="Sections">
-              {view.snapshot.sections.map((s) => (
-                <li key={s.order}>
-                  <span
-                    aria-current={s.order === section.order ? "step" : undefined}
-                    className={cx(
-                      "rounded-full px-2 py-0.5",
-                      s.order === section.order ? "bg-primary text-primary-fg" : s.order < section.order ? "bg-success-soft text-success" : "bg-surface-2 text-muted",
+            <ol className="mt-1 flex flex-wrap gap-1 text-xs" aria-label={t.exam.sections}>
+              {view.snapshot.sections.map((s) => {
+                const done = Boolean(view.sections.find((x) => x.order === s.order)?.submittedAt);
+                const current = s.order === section.order;
+                const cls = cx("rounded-full px-2 py-0.5", current ? "bg-primary text-primary-fg" : done ? "bg-success-soft text-success" : "bg-surface-2 text-muted");
+                const label = `${s.order + 1}. ${SKILL_LABEL[s.skill]}${done ? " ✓" : ""}`;
+                // Practice mode: open sections can be chosen freely. Exam mode keeps the official order.
+                const canJump = !strict && !current && !done;
+                return (
+                  <li key={s.order}>
+                    {canJump ? (
+                      <button type="button" onClick={() => void jumpTo(s.order)} disabled={busy} className={cx(cls, "underline-offset-2 hover:underline")} title={t.exam.goToSection}>
+                        {label}
+                      </button>
+                    ) : (
+                      <span aria-current={current ? "step" : undefined} className={cls}>
+                        {label}
+                      </span>
                     )}
-                  >
-                    {s.order + 1}. {SKILL_LABEL[s.skill]}
-                  </span>
-                </li>
-              ))}
+                  </li>
+                );
+              })}
             </ol>
+            {!strict && <p className="mt-1 text-xs text-muted">{t.exam.practiceJumpHint}</p>}
           </div>
           <Badge tone={strict ? "warning" : "primary"}>{strict ? t.exam.examMode : t.exam.practiceMode}</Badge>
           <div className="text-right" aria-live="off">
@@ -473,6 +500,7 @@ function ListeningView({
               title={group.title}
               strict={strict}
               playsUsed={view.plays[group.id] ?? 0}
+              knownDuration={group.durationSeconds}
               maxPlays={maxPlays}
               onBeforePlay={async () => {
                 const r = await registerPlayAction({ attemptId, audioId: group.id });

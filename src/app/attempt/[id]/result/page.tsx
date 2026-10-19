@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 import { and, eq } from "drizzle-orm";
 import { getDb } from "@/server/db";
 import { mistakeBookmarks, speakingSubmissions, writingSubmissions } from "@/server/db/schema";
-import { requireLearner } from "@/server/identity";
+import { currentLearner, requireLearner } from "@/server/identity";
 import { EngineError, getAttemptView, type ScoreSummary } from "@/server/exam-engine";
 import { getScoringConfig } from "@/server/ops";
 import type { SpeakingFeedback, WritingFeedback } from "@/server/grading/types";
@@ -43,7 +43,7 @@ export default async function ResultPage({ params }: { params: Promise<{ id: str
   const isMock = view.snapshot.blueprint.kind === "mock";
 
   return (
-    <AppShell>
+    <AppShell username={(await currentLearner())?.username}>
       <PageHeader
         title={`${t.exam.results}: ${view.snapshot.blueprint.name}`}
         crumbs={[{ href: "/history", label: t.nav.history }, { label: t.exam.results }]}

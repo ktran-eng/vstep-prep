@@ -8,7 +8,7 @@ export type Dashboard = Awaited<ReturnType<typeof getDashboard>>;
 
 /** All numbers derive from the learner's persisted records; nothing is cached or fabricated. */
 export async function getDashboard(db: Db, learnerId: string) {
-  const attempts = await db
+  const attemptsQuery = db
     .select({
       id: examAttempts.id,
       startedAt: examAttempts.startedAt,
@@ -25,9 +25,12 @@ export async function getDashboard(db: Db, learnerId: string) {
     .innerJoin(testBlueprints, eq(testBlueprints.id, examAttempts.blueprintId))
     .where(eq(examAttempts.learnerId, learnerId))
     .orderBy(asc(examAttempts.startedAt));
-  const writing = await db.select().from(writingSubmissions).where(and(eq(writingSubmissions.learnerId, learnerId), eq(writingSubmissions.status, "submitted"))).orderBy(asc(writingSubmissions.submittedAt));
-  const speaking = await db.select().from(speakingSubmissions).where(eq(speakingSubmissions.learnerId, learnerId)).orderBy(asc(speakingSubmissions.submittedAt));
-  const [prefs] = await db.select().from(learnerPreferences).where(eq(learnerPreferences.learnerId, learnerId));
+  const [attempts, writing, speaking, [prefs]] = await Promise.all([
+    attemptsQuery,
+    db.select().from(writingSubmissions).where(and(eq(writingSubmissions.learnerId, learnerId), eq(writingSubmissions.status, "submitted"))).orderBy(asc(writingSubmissions.submittedAt)),
+    db.select().from(speakingSubmissions).where(eq(speakingSubmissions.learnerId, learnerId)).orderBy(asc(speakingSubmissions.submittedAt)),
+    db.select().from(learnerPreferences).where(eq(learnerPreferences.learnerId, learnerId)),
+  ]);
 
   const done = attempts.filter((a) => a.status !== "in_progress" && a.summary);
   const trend: { date: string; skill: string; score: number; label: string }[] = [];

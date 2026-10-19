@@ -1,7 +1,9 @@
 import "server-only";
-import { cookies } from "next/headers";
+import { cookies, headers } from "next/headers";
+import { redirect } from "next/navigation";
+import { cache } from "react";
 import { eq } from "drizzle-orm";
-import { LEARNER_COOKIE, UUID_RE, verify } from "@/lib/signing";
+import { LEARNER_COOKIE, UUID_RE, sign, verify } from "@/lib/signing";
 import { getDb } from "./db";
 import { learnerPreferences, learners } from "./db/schema";
 
@@ -19,23 +21,59 @@ export async function readLearnerId(): Promise<string | null> {
   return id && UUID_RE.test(id) ? id : null;
 }
 
-/** Returns the current learner id, creating the learner row on first use. */
-export async function requireLearner(): Promise<string> {
+const LAST_SEEN_RESOLUTION_MS = 60 * 60 * 1000;
+
+/** The signed-in learner (id + username), or null. Memoised per request, so layout and page share one query. */
+export const currentLearner = cache(async () => {
   const id = await readLearnerId();
-  if (!id) throw new UnauthorizedError("Missing learner session. Please enable cookies and reload.");
-  await ensureLearnerRow(id);
-  return id;
+  if (!id) return null;
+  const db = await getDb();
+  const [row] = await db
+    .select({ id: learners.id, username: learners.username, displayName: learners.displayName, lastSeenAt: learners.lastSeenAt })
+    .from(learners)
+    .where(eq(learners.id, id));
+  return row?.username ? row : null;
+});
+
+/**
+ * Returns the signed-in learner's id, or sends the visitor to /start to choose a sign-in name.
+ * Works in Server Components and Server Actions (redirect is propagated by the action wrapper).
+ */
+export const requireLearner = cache(async (): Promise<string> => {
+  const me = await currentLearner();
+  if (!me) {
+    const path = (await headers()).get("x-vstep-path");
+    redirect(path && path !== "/" ? `/start?next=${encodeURIComponent(path)}` : "/start");
+  }
+  const now = Date.now();
+  if (now - me.lastSeenAt.getTime() > LAST_SEEN_RESOLUTION_MS) {
+    const db = await getDb();
+    await db.update(learners).set({ lastSeenAt: new Date(now) }).where(eq(learners.id, me.id));
+  }
+  return me.id;
+});
+
+export { findOrCreateByUsername } from "./learners";
+
+export async function setSessionCookie(learnerId: string) {
+  (await cookies()).set(LEARNER_COOKIE, await sign(learnerId), {
+    httpOnly: true,
+    sameSite: "lax",
+    secure: process.env.NODE_ENV === "production",
+    path: "/",
+    maxAge: 60 * 60 * 24 * 400,
+  });
 }
 
-export async function ensureLearnerRow(id: string) {
-  const db = await getDb();
-  await db.insert(learners).values({ id }).onConflictDoUpdate({ target: learners.id, set: { lastSeenAt: new Date() } });
-  await db.insert(learnerPreferences).values({ learnerId: id }).onConflictDoNothing();
+export async function clearSessionCookie() {
+  (await cookies()).delete(LEARNER_COOKIE);
 }
 
-export async function getLearnerProfile(id: string) {
+export const getLearnerProfile = cache(async (id: string) => {
   const db = await getDb();
-  const [learner] = await db.select().from(learners).where(eq(learners.id, id));
-  const [prefs] = await db.select().from(learnerPreferences).where(eq(learnerPreferences.learnerId, id));
+  const [[learner], [prefs]] = await Promise.all([
+    db.select().from(learners).where(eq(learners.id, id)),
+    db.select().from(learnerPreferences).where(eq(learnerPreferences.learnerId, id)),
+  ]);
   return { learner: learner ?? null, prefs: prefs ?? null };
-}
+});

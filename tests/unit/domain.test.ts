@@ -9,6 +9,7 @@ import type { Mcq } from "@/domain/content-schema";
 import { buildRecommendations } from "@/domain/recommendations";
 import { generateWeeklyPlan, weekStartOf } from "@/domain/study-plan";
 import { sign, verify } from "@/lib/signing";
+import { normaliseUsername, safeNextPath } from "@/domain/username";
 import { sniffAudio, validateRecording } from "@/server/audio-upload";
 
 describe("scoring", () => {
@@ -188,6 +189,24 @@ describe("recommendations and planning", () => {
     expect(tasks.map((t) => t.dayOfWeek)).toEqual([1, 3, 5]);
     expect(tasks[2]!.skill).toBe("mock");
     expect(weekStartOf("2026-10-18")).toBe("2026-10-12"); // Sunday → Monday of that week
+  });
+});
+
+describe("sign-in names", () => {
+  it("normalises case, whitespace and Unicode form", () => {
+    expect(normaliseUsername("  Lan.Nguyen ")).toEqual({ ok: true, value: "lan.nguyen" });
+    expect(normaliseUsername("Khải_2026")).toEqual({ ok: true, value: "khải_2026" });
+    // Decomposed and precomposed Vietnamese letters map to the same name.
+    expect(normaliseUsername("Khải")).toEqual(normaliseUsername("Khải"));
+  });
+  it("rejects invalid names", () => {
+    for (const bad of ["ab", "a".repeat(33), "lan nguyen", "lan@mail", "<script>", ".lan", "lan-"]) expect(normaliseUsername(bad).ok).toBe(false);
+  });
+  it("only redirects to local paths after sign-in", () => {
+    expect(safeNextPath("/mock")).toBe("/mock");
+    expect(safeNextPath("https://evil.example")).toBe("/dashboard");
+    expect(safeNextPath("//evil.example")).toBe("/dashboard");
+    expect(safeNextPath(null)).toBe("/dashboard");
   });
 });
 

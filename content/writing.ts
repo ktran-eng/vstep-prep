@@ -165,6 +165,118 @@ Addressing these problems requires action on both fronts. Governments could enco
 In conclusion, migration to cities is an understandable response to unequal opportunity. Its negative effects can be reduced, but only if development is spread more evenly across the country.`,
     },
   },
+  {
+    id: "wr-m4-letter-club",
+    task: "letter",
+    level: "B2",
+    title: "Asking to join an English club",
+    topic: "Community & learning",
+    instructions:
+      "You have seen an advertisement for an English conversation club at your local library. Write an email to the club organiser, Ms Sarah Jones. You should write at least 120 words. Do not include your name or addresses.",
+    stimulus: `In your email:
+• introduce yourself and say why you want to join
+• ask about the meeting times and any fees
+• ask what level of English members need`,
+    requiredPoints: ["Introduce yourself and give a reason for joining", "Ask about meeting times and fees", "Ask about the required English level", "Use an appropriate semi-formal register"],
+    minWords: 120,
+    suggestedMinutes: 20,
+    sample: {
+      level: "B2",
+      text: `Dear Ms Jones,
+
+I saw your advertisement for the English conversation club at the city library, and I am writing to ask whether I could join.
+
+I am a 24-year-old accountant, and I am preparing for the VSTEP exam in March. Although my reading and writing are quite good, I rarely have the chance to speak English, so I often feel nervous in conversations. I believe that a friendly club would help me become more confident.
+
+Could you tell me how often the club meets and at what time? As I work until six on weekdays, evening or weekend sessions would suit me best. I would also like to know whether there is a membership fee.
+
+Finally, what level of English do members usually have? I think my level is around B1.
+
+I look forward to hearing from you.
+
+Yours sincerely,`,
+    },
+  },
+  {
+    id: "wr-m5-letter-complaint-course",
+    task: "letter",
+    level: "B2",
+    title: "Problem with an online course",
+    topic: "Education & services",
+    instructions:
+      "You paid for an online English course, but there have been several problems. Write an email to the course provider. You should write at least 120 words. Do not include your name or addresses.",
+    stimulus: `Problems:
+• the live lessons have been cancelled twice without notice
+• the practice materials promised in the advertisement are not available
+• your emails to the support team have not been answered`,
+    requiredPoints: ["Explain which course you bought and when", "Describe the problems clearly", "Say how they have affected you", "State what you want the company to do", "Use a formal register"],
+    minWords: 120,
+    suggestedMinutes: 20,
+    sample: {
+      level: "B2",
+      text: `Dear Sir or Madam,
+
+I am writing to complain about the twelve-week online IELTS and VSTEP preparation course that I purchased from your website on 5 September.
+
+Since the course began, two of the live lessons have been cancelled without any notice. On both occasions I waited online for more than thirty minutes before giving up. In addition, the practice tests and audio files that were promised in your advertisement are still not available in my account. I have sent three emails to your support team about these problems, but I have not received a single reply.
+
+As my exam is in December, these issues have caused me considerable stress and wasted valuable preparation time.
+
+I would therefore like you to provide the missing materials immediately and to offer replacement lessons. If this is not possible, I would expect a partial refund.
+
+I look forward to your prompt reply.
+
+Yours faithfully,`,
+    },
+  },
+  {
+    id: "wr-m4-essay-online-shopping",
+    task: "essay",
+    level: "B2",
+    title: "Online shopping and local shops",
+    topic: "Economy & society",
+    instructions: "Write an essay of at least 250 words on the following topic. Use reasons and specific examples to support your answer.",
+    stimulus: "As more people shop online, many small local shops are closing. Is this a positive or negative development?",
+    requiredPoints: ["Give a clear overall position", "Discuss positive aspects of online shopping", "Discuss negative effects on local shops and communities", "Support ideas with reasons and examples"],
+    minWords: 250,
+    suggestedMinutes: 40,
+    sample: {
+      level: "B2",
+      text: `In recent years, online shopping has grown rapidly in Vietnam, and many small shops in my neighbourhood have closed as a result. While online shopping offers clear benefits to consumers, I believe the decline of local shops is, on balance, a negative development.
+
+There is no denying that shopping online is convenient. Customers can compare prices from many sellers in a few minutes, read reviews from other buyers and have goods delivered to their door. For people who live far from city centres or who work long hours, this saves a great deal of time. Online platforms also allow small producers, such as farmers or craftspeople, to sell directly to customers across the country.
+
+However, the closure of local shops has serious costs. First, it affects employment. A small shop often supports a family and sometimes employs neighbours, while online sales tend to benefit large platforms and delivery companies. Second, local shops play a social role. The owner of a corner shop knows the residents, gives advice and often allows regular customers to pay later, which creates trust in the community. Finally, a street full of closed shops becomes less lively and less safe, especially in the evening.
+
+In my opinion, the best solution is not to reject online shopping but to help local shops adapt. Many shop owners could sell online themselves while keeping their physical stores, and local governments could support them with training and lower rents.
+
+In conclusion, although online shopping brings convenience, the loss of local shops harms jobs and community life. Therefore, I see the current trend as mainly negative unless small businesses receive more support.`,
+    },
+  },
+  {
+    id: "wr-m5-essay-volunteering",
+    task: "essay",
+    level: "C1",
+    title: "Compulsory community service",
+    topic: "Education & society",
+    instructions: "Write an essay of at least 250 words on the following topic. Use reasons and specific examples to support your answer.",
+    stimulus: "Some people believe that secondary school students should be required to do unpaid community service as part of their education. To what extent do you agree or disagree?",
+    requiredPoints: ["State a clear, nuanced position", "Discuss benefits of community service for students and society", "Evaluate objections such as workload and the value of compulsion", "Use precise examples and logical organisation"],
+    minWords: 250,
+    suggestedMinutes: 40,
+    sample: {
+      level: "C1",
+      text: `Proposals to make community service a compulsory part of secondary education are increasingly common, motivated by concerns that young people are disconnected from their communities. I agree that such programmes can be valuable, but only if they are designed carefully and do not become a mere box-ticking exercise.
+
+The strongest argument in favour is that service exposes students to realities they might otherwise never encounter. A teenager who spends a few hours a month helping at a care home or tutoring younger children develops empathy and an understanding of social problems that no textbook can provide. Such experience also builds practical skills, including communication, responsibility and teamwork, which employers and universities increasingly value. Moreover, communities benefit directly from the additional help, particularly in areas where public services are stretched.
+
+Nevertheless, there are legitimate objections. Many students already face heavy academic workloads and long hours of extra classes, and adding further obligations could increase stress. Critics also argue that compulsion undermines the very spirit of volunteering: a reluctant student counting the hours may learn little and contribute even less. There is a risk, too, that organisations receive inexperienced helpers they have no capacity to supervise.
+
+These concerns suggest that the issue lies less in whether service should be required than in how it is organised. A modest requirement, perhaps twenty hours a year, combined with genuine choice of activity and time for reflection in class, would preserve students' autonomy while ensuring that everyone gains some experience. Schools could also partner with established organisations to guarantee meaningful tasks.
+
+In conclusion, I largely support compulsory community service, provided it is flexible, well supervised and integrated into the curriculum rather than imposed as an additional burden.`,
+    },
+  },
   /* -------------------------- Practice letters -------------------------- */
   {
     id: "wr-p-b1-letter-party",

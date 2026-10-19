@@ -36,8 +36,13 @@ export function TestCard({ item, modes = ["exam", "practice"] }: { item: Catalog
             Tiếp tục ({a.mode === "exam" ? "thi thử" : "luyện tập"})
           </ButtonLink>
         ))}
+        {item.kind === "mock" && (
+          <ButtonLink href={`/mock/${item.id}`} variant={item.inProgress.length ? "secondary" : "primary"}>
+            Xem cấu trúc & bắt đầu
+          </ButtonLink>
+        )}
         {modes
-          .filter((m) => !item.inProgress.some((a) => a.mode === m))
+          .filter((m) => item.kind !== "mock" && !item.inProgress.some((a) => a.mode === m))
           .map((m) => (
             <form key={m} action={startAttemptAction}>
               <input type="hidden" name="blueprintId" value={item.id} />

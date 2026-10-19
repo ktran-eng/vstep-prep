@@ -23,11 +23,13 @@ const createdAt = () => timestamp("created_at", { withTimezone: true }).notNull(
 const updatedAt = () => timestamp("updated_at", { withTimezone: true }).notNull().defaultNow();
 
 /* ------------------------------------------------------------------ */
-/* Learners (anonymous, cookie-identified — no accounts by design)     */
+/* Learners (identified by sign-in name; no password by design)        */
 /* ------------------------------------------------------------------ */
 
 export const learners = pgTable("learners", {
   id: uuid("id").primaryKey().defaultRandom(),
+  // Normalised sign-in name (lowercase, NFC). No password by design: knowing the name opens the profile.
+  username: text("username").unique(),
   displayName: text("display_name"),
   preferredLanguage: text("preferred_language").notNull().default("vi"),
   timezone: text("timezone").notNull().default("Asia/Ho_Chi_Minh"),

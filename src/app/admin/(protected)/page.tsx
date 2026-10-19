@@ -8,7 +8,7 @@ export default async function AdminHome() {
   const ai = aiGradingConfigured();
   return (
     <>
-      <PageHeader title="Tổng quan quản trị" description="Không có tài khoản người dùng: người học được nhận diện bằng mã ẩn danh; trang này chỉ hiển thị số liệu tổng hợp." />
+      <PageHeader title="Tổng quan quản trị" description="Số liệu tổng hợp; không hiển thị dữ liệu của từng người học." />
       <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
         <Stat label="Câu hỏi" value={o.questions} />
         <Stat label="Bài đọc" value={o.passages} />
@@ -16,7 +16,7 @@ export default async function AdminHome() {
         <Stat label="Đề thi/bài luyện" value={o.tests} />
         <Stat label="Đề Viết" value={o.writingPrompts} />
         <Stat label="Đề Nói" value={o.speakingPrompts} />
-        <Stat label="Người học (ẩn danh)" value={o.learners} />
+        <Stat label="Người học" value={o.learners} />
         <Stat label="Lượt làm bài" value={o.attempts} hint={`${o.writingSubs} bài viết · ${o.speakingSubs} bài nói`} />
       </div>
       <Card className="mt-6">

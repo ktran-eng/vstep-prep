@@ -71,7 +71,7 @@
     "attributionText": "ZIM Academy.",
     "contentCovered": "Listening split 8/12/15; speaking part timings 3′/4′/5′; sample tests with explanations.",
     "confidence": "medium",
-    "notes": "Secondary source. Its listening split and speaking timings are not in the decree, so they are marked unverified."
+    "notes": "Secondary source. Its listening split and speaking timings are not in the decree, so they are marked unverified. Terms (zim.vn/dieu-khoan-su-dung) forbid copying without ZIM's written approval. Link only."
   },
   {
     "id": "vivian-vstep-edu",
@@ -84,9 +84,9 @@
     "licenseType": "Proprietary (linked only)",
     "permissionStatus": "link_only",
     "attributionText": "Anh Ngữ Vivian.",
-    "contentCovered": "Supplementary learning articles and downloadable sample sets.",
+    "contentCovered": "B1/B2/C1 four-skill sets (download via lead form) and an online mock test.",
     "confidence": "low",
-    "notes": "Not used as a source for format claims."
+    "notes": "Terms: materials are copyright-protected; copying needs Vivian's prior written approval. Link only; set contents not inspected."
   },
   {
     "id": "ace-of-english",
@@ -99,9 +99,24 @@
     "licenseType": "All rights reserved (linked only)",
     "permissionStatus": "link_only",
     "attributionText": "ACE of English.",
-    "contentCovered": "Practice tests, speaking/writing practice with AI feedback, guides to the score scale.",
+    "contentCovered": "Single-skill VSTEP libraries: 16 Reading mock tests, 13 Listening tests, Writing and Speaking practice with AI feedback.",
     "confidence": "low",
-    "notes": "Supplementary only."
+    "notes": "Terms §6 forbid copying or distributing practice materials without written permission; §7 forbids automated collection. Link only."
+  },
+  {
+    "id": "ctu-cfla-illustrative",
+    "title": "Đề thi minh họa (Bậc 3 - 5) and Reading answer key",
+    "publisher": "Trung tâm Ngoại ngữ, Trường Đại học Cần Thơ (CFLA)",
+    "canonicalUrl": "https://cfla.ctu.edu.vn/tai-lieu",
+    "sourceType": "institutional",
+    "publicationDate": "2019-11-27",
+    "lastVerifiedAt": "2026-10-18",
+    "licenseType": "No licence stated (all rights reserved by default; linked only)",
+    "permissionStatus": "link_only",
+    "attributionText": "Trường Đại học Cần Thơ – CFLA.",
+    "contentCovered": "Four-skill illustrative VSTEP 3–5 test; answer key published for Reading only.",
+    "confidence": "medium",
+    "notes": "Partial: no Listening key; audio availability not verified."
   },
   {
     "id": "original-content",

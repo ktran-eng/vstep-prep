@@ -69,7 +69,7 @@ export default async function SettingsPage({ searchParams }: { searchParams: Pro
           <Card>
             <h2 className="mb-2 font-semibold">Dữ liệu của bạn</h2>
             <p className="text-sm text-muted">
-              Ứng dụng không dùng tài khoản. Tiến độ gắn với một mã ẩn danh lưu trong cookie của trình duyệt này; xoá cookie hoặc dùng trình duyệt khác sẽ bắt đầu hồ sơ mới. Xem{" "}
+              Tiến độ được lưu theo tên đăng nhập <b>{learner?.username}</b>. Không có mật khẩu: nhập cùng tên trên máy khác để tiếp tục, và ai biết tên này đều mở được hồ sơ. Xem{" "}
               <Link href="/privacy" className="underline">
                 chính sách quyền riêng tư
               </Link>

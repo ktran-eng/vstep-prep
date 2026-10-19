@@ -33,12 +33,14 @@ export async function getReviewItems(db: Db, learnerId: string, opts: { skill?: 
     .limit(30);
   if (!attempts.length) return [];
   const ids = attempts.map((a) => a.id);
-  const wrong = await db.select().from(attemptAnswers).where(and(inArray(attemptAnswers.attemptId, ids), eq(attemptAnswers.isCorrect, false)));
-  const bookmarks = await db.select().from(mistakeBookmarks).where(eq(mistakeBookmarks.learnerId, learnerId));
-  const snaps = await db
-    .select()
-    .from(blueprintSnapshots)
-    .where(inArray(blueprintSnapshots.id, [...new Set(attempts.map((a) => a.snapshotId))]));
+  const [wrong, bookmarks, snaps] = await Promise.all([
+    db.select().from(attemptAnswers).where(and(inArray(attemptAnswers.attemptId, ids), eq(attemptAnswers.isCorrect, false))),
+    db.select().from(mistakeBookmarks).where(eq(mistakeBookmarks.learnerId, learnerId)),
+    db
+      .select({ id: blueprintSnapshots.id, publicPayload: blueprintSnapshots.publicPayload, protectedPayload: blueprintSnapshots.protectedPayload })
+      .from(blueprintSnapshots)
+      .where(inArray(blueprintSnapshots.id, [...new Set(attempts.map((a) => a.snapshotId))])),
+  ]);
 
   const seen = new Set<string>();
   const items: ReviewItem[] = [];

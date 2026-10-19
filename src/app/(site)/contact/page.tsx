@@ -16,11 +16,9 @@ export default function ContactPage() {
               {email}
             </a>
           </p>
-        ) : (
-          <p className="text-muted">Địa chỉ email hỗ trợ chưa được cấu hình (biến môi trường SUPPORT_EMAIL).</p>
-        )}
+        ) : null}
         <p>Khi báo lỗi nội dung (đáp án sai, giải thích chưa rõ), vui lòng ghi tên đề và số câu. Chúng tôi xem xét mọi báo cáo và cập nhật phiên bản câu hỏi; bài làm cũ của bạn vẫn giữ nguyên phiên bản đề đã dùng.</p>
-        <p>Lưu ý: chúng tôi không thể khôi phục tiến độ nếu bạn xoá cookie trình duyệt, vì nền tảng không dùng tài khoản.</p>
+        <p>Tiến độ được lưu theo tên đăng nhập: vào lại bằng đúng tên đó trên bất kỳ thiết bị nào để tiếp tục. Chúng tôi không thể khôi phục tên đăng nhập đã quên.</p>
       </Card>
     </>
   );

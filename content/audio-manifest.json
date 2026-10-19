@@ -386,6 +386,264 @@
     },
     "hash": "7d5fb6a4269e6bd5"
   },
+  "ls-m4-p1-clinic": {
+    "file": "ls-m4-p1-clinic.mp3",
+    "durationSeconds": 20.1,
+    "method": "windows_sapi_dev",
+    "voices": {
+      "Nurse": "Microsoft Zira"
+    },
+    "hash": "62e07a277fd9ffb3"
+  },
+  "ls-m4-p1-exam": {
+    "file": "ls-m4-p1-exam.mp3",
+    "durationSeconds": 20.9,
+    "method": "windows_sapi_dev",
+    "voices": {
+      "Invigilator": "Microsoft David"
+    },
+    "hash": "5b2463fd424291c8"
+  },
+  "ls-m4-p1-festival": {
+    "file": "ls-m4-p1-festival.mp3",
+    "durationSeconds": 21.7,
+    "method": "windows_sapi_dev",
+    "voices": {
+      "Announcer": "Microsoft Zira"
+    },
+    "hash": "9bfc5bea2f968f14"
+  },
+  "ls-m4-p1-gym": {
+    "file": "ls-m4-p1-gym.mp3",
+    "durationSeconds": 19.6,
+    "method": "windows_sapi_dev",
+    "voices": {
+      "Announcer": "Microsoft Zira"
+    },
+    "hash": "b759914eb146f89c"
+  },
+  "ls-m4-p1-library": {
+    "file": "ls-m4-p1-library.mp3",
+    "durationSeconds": 18,
+    "method": "windows_sapi_dev",
+    "voices": {
+      "Announcer": "Microsoft David"
+    },
+    "hash": "cc9005a7c92ddcad"
+  },
+  "ls-m4-p1-shop": {
+    "file": "ls-m4-p1-shop.mp3",
+    "durationSeconds": 22.2,
+    "method": "windows_sapi_dev",
+    "voices": {
+      "Announcer": "Microsoft Zira"
+    },
+    "hash": "af3db6e6877a75fc"
+  },
+  "ls-m4-p1-train": {
+    "file": "ls-m4-p1-train.mp3",
+    "durationSeconds": 19.9,
+    "method": "windows_sapi_dev",
+    "voices": {
+      "Announcer": "Microsoft David"
+    },
+    "hash": "1ef2914042dd52d2"
+  },
+  "ls-m4-p1-weather": {
+    "file": "ls-m4-p1-weather.mp3",
+    "durationSeconds": 22,
+    "method": "windows_sapi_dev",
+    "voices": {
+      "Presenter": "Microsoft Zira"
+    },
+    "hash": "b7edd7ee2a3b7ae3"
+  },
+  "ls-m4-p2-course": {
+    "file": "ls-m4-p2-course.mp3",
+    "durationSeconds": 66.9,
+    "method": "windows_sapi_dev",
+    "voices": {
+      "Vy": "Microsoft Zira",
+      "Duy": "Microsoft David"
+    },
+    "hash": "6f474b1561f2979a"
+  },
+  "ls-m4-p2-internship": {
+    "file": "ls-m4-p2-internship.mp3",
+    "durationSeconds": 71.4,
+    "method": "windows_sapi_dev",
+    "voices": {
+      "Manager": "Microsoft David",
+      "Hien": "Microsoft Zira"
+    },
+    "hash": "c26cef63739831ff"
+  },
+  "ls-m4-p2-recycling": {
+    "file": "ls-m4-p2-recycling.mp3",
+    "durationSeconds": 63.6,
+    "method": "windows_sapi_dev",
+    "voices": {
+      "Thanh": "Microsoft David",
+      "Lien": "Microsoft Zira"
+    },
+    "hash": "7bdf28ab7883bab5"
+  },
+  "ls-m4-p3-feedback": {
+    "file": "ls-m4-p3-feedback.mp3",
+    "durationSeconds": 88.9,
+    "method": "windows_sapi_dev",
+    "voices": {
+      "Speaker": "Microsoft David"
+    },
+    "hash": "dbc31cb99db7d4ae"
+  },
+  "ls-m4-p3-sleep-tech": {
+    "file": "ls-m4-p3-sleep-tech.mp3",
+    "durationSeconds": 79.8,
+    "method": "windows_sapi_dev",
+    "voices": {
+      "Speaker": "Microsoft David"
+    },
+    "hash": "39971cfe64c7452e"
+  },
+  "ls-m4-p3-urban-trees": {
+    "file": "ls-m4-p3-urban-trees.mp3",
+    "durationSeconds": 97.4,
+    "method": "windows_sapi_dev",
+    "voices": {
+      "Lecturer": "Microsoft Zira"
+    },
+    "hash": "7a7ff49fbcd8b337"
+  },
+  "ls-m5-p1-airport": {
+    "file": "ls-m5-p1-airport.mp3",
+    "durationSeconds": 20.5,
+    "method": "windows_sapi_dev",
+    "voices": {
+      "Announcer": "Microsoft David"
+    },
+    "hash": "ebf909bf4e24a5b8"
+  },
+  "ls-m5-p1-bus": {
+    "file": "ls-m5-p1-bus.mp3",
+    "durationSeconds": 21.6,
+    "method": "windows_sapi_dev",
+    "voices": {
+      "Tour guide": "Microsoft Zira"
+    },
+    "hash": "149ebe5456fa38e5"
+  },
+  "ls-m5-p1-cafe": {
+    "file": "ls-m5-p1-cafe.mp3",
+    "durationSeconds": 21.4,
+    "method": "windows_sapi_dev",
+    "voices": {
+      "Announcer": "Microsoft Zira"
+    },
+    "hash": "723eb68278f49858"
+  },
+  "ls-m5-p1-class": {
+    "file": "ls-m5-p1-class.mp3",
+    "durationSeconds": 22,
+    "method": "windows_sapi_dev",
+    "voices": {
+      "Instructor": "Microsoft Zira"
+    },
+    "hash": "88a811c45c357d96"
+  },
+  "ls-m5-p1-dentist": {
+    "file": "ls-m5-p1-dentist.mp3",
+    "durationSeconds": 22.1,
+    "method": "windows_sapi_dev",
+    "voices": {
+      "Announcer": "Microsoft Zira"
+    },
+    "hash": "270f7c15ce9d32b8"
+  },
+  "ls-m5-p1-museum": {
+    "file": "ls-m5-p1-museum.mp3",
+    "durationSeconds": 17.8,
+    "method": "windows_sapi_dev",
+    "voices": {
+      "Announcer": "Microsoft David"
+    },
+    "hash": "e0c5b72cdbe73555"
+  },
+  "ls-m5-p1-phone": {
+    "file": "ls-m5-p1-phone.mp3",
+    "durationSeconds": 22.2,
+    "method": "windows_sapi_dev",
+    "voices": {
+      "Announcer": "Microsoft David"
+    },
+    "hash": "4f08d114f24af86d"
+  },
+  "ls-m5-p1-water": {
+    "file": "ls-m5-p1-water.mp3",
+    "durationSeconds": 19.9,
+    "method": "windows_sapi_dev",
+    "voices": {
+      "Announcer": "Microsoft David"
+    },
+    "hash": "4577e1f6824d0745"
+  },
+  "ls-m5-p2-birthday": {
+    "file": "ls-m5-p2-birthday.mp3",
+    "durationSeconds": 63.3,
+    "method": "windows_sapi_dev",
+    "voices": {
+      "Mai": "Microsoft Zira",
+      "Long": "Microsoft David"
+    },
+    "hash": "b925ee8deacf6d2f"
+  },
+  "ls-m5-p2-landlord": {
+    "file": "ls-m5-p2-landlord.mp3",
+    "durationSeconds": 63.7,
+    "method": "windows_sapi_dev",
+    "voices": {
+      "Tenant": "Microsoft Zira",
+      "Landlord": "Microsoft David"
+    },
+    "hash": "4dcf5bd5ed40d3b8"
+  },
+  "ls-m5-p2-study-group": {
+    "file": "ls-m5-p2-study-group.mp3",
+    "durationSeconds": 61.5,
+    "method": "windows_sapi_dev",
+    "voices": {
+      "Nam": "Microsoft David",
+      "Trang": "Microsoft Zira"
+    },
+    "hash": "af34f195d0f18920"
+  },
+  "ls-m5-p3-ai-jobs": {
+    "file": "ls-m5-p3-ai-jobs.mp3",
+    "durationSeconds": 110.6,
+    "method": "windows_sapi_dev",
+    "voices": {
+      "Lecturer": "Microsoft David"
+    },
+    "hash": "a5de92e6cfae0897"
+  },
+  "ls-m5-p3-mekong": {
+    "file": "ls-m5-p3-mekong.mp3",
+    "durationSeconds": 77.5,
+    "method": "windows_sapi_dev",
+    "voices": {
+      "Speaker": "Microsoft Zira"
+    },
+    "hash": "0115e1edfd8a3f79"
+  },
+  "ls-m5-p3-reading": {
+    "file": "ls-m5-p3-reading.mp3",
+    "durationSeconds": 82.8,
+    "method": "windows_sapi_dev",
+    "voices": {
+      "Speaker": "Microsoft Zira"
+    },
+    "hash": "26705ae412616076"
+  },
   "ls-p-b1-a1": {
     "file": "ls-p-b1-a1.mp3",
     "durationSeconds": 21.2,

@@ -8,6 +8,7 @@ import type { SpeakingGrader, Transcriber, WritingGrader } from "@/server/gradin
 import { advanceSection, recomputeSummary, saveAnswer, getAttemptView, startAttempt, submitAttempt, type ScoreSummary } from "@/server/exam-engine";
 import { getDashboard } from "@/server/analytics";
 import { runRetention } from "@/server/maintenance";
+import { findOrCreateByUsername } from "@/server/learners";
 import { DEFAULT_SCORING_CONFIG as CFG } from "@/domain/spec";
 
 let db: Db;
@@ -157,6 +158,27 @@ describe("analytics & results", () => {
     // Empty writing counts as 0 rather than pending.
     const re = await recomputeSummary(db, attemptId, CFG);
     expect((re.scoreSummary as ScoreSummary).skills.find((x) => x.skill === "writing")!.estimate).toBe(0);
+  });
+});
+
+describe("username profiles", () => {
+  it("the same name always opens the same profile, including concurrent first sign-ins", async () => {
+    const [a, b] = await Promise.all([findOrCreateByUsername(db, "lan.vstep"), findOrCreateByUsername(db, "lan.vstep")]);
+    expect(a.id).toBe(b.id);
+    const again = await findOrCreateByUsername(db, "lan.vstep");
+    expect(again.id).toBe(a.id);
+    const other = await findOrCreateByUsername(db, "minh.vstep");
+    expect(other.id).not.toBe(a.id);
+    const prefs = await db.select().from(t.learnerPreferences).where(eq(t.learnerPreferences.learnerId, a.id));
+    expect(prefs).toHaveLength(1);
+  });
+
+  it("progress follows the name: a new sign-in sees earlier results", async () => {
+    const first = await findOrCreateByUsername(db, "progress.user");
+    const { attemptId } = await startAttempt(db, first.id, "practice-test-reading", "practice");
+    await submitAttempt(db, first.id, attemptId, CFG);
+    const later = await findOrCreateByUsername(db, "progress.user"); // e.g. from another device
+    expect((await getDashboard(db, later.id)).counts.sessions).toBe(1);
   });
 });
 

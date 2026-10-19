@@ -16,7 +16,8 @@ async function main() {
     const { getDb, resetDbForTests } = await import("../src/server/db/client");
     await getDb(); // PGlite client migrates on open
     await resetDbForTests();
-    console.log("Migrations applied to local PGlite database (.data/pglite).");
+    const { pgliteDataDir } = await import("../src/server/db/client");
+    console.log(`Migrations applied to local PGlite database (${pgliteDataDir()}).`);
   }
 }
 

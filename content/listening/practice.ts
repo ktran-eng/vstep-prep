@@ -1,32 +1,5 @@
 import type { ListeningSetInput } from "@/domain/content-schema";
-
-const A = "Announcer";
-type Ann = { id: string; title: string; topic: string; voice: "male" | "female"; s1: string; s2: string; prompt: string; options: [string, string, string, string]; ref: "S1" | "S2"; quote: string; explanation: string };
-
-/** Short Part-1 style announcements: correct option is always listed first and shuffled at load time. */
-const ann = (a: Ann): ListeningSetInput => ({
-  id: a.id,
-  title: a.title,
-  part: 1,
-  level: "B1",
-  topic: a.topic,
-  segments: [
-    { speaker: A, voice: a.voice, text: a.s1 },
-    { speaker: A, voice: a.voice, text: a.s2 },
-  ],
-  questions: [
-    {
-      id: `${a.id}-q1`,
-      type: "detail",
-      difficulty: 2,
-      prompt: a.prompt,
-      options: { A: a.options[0], B: a.options[1], C: a.options[2], D: a.options[3] },
-      answer: "A",
-      explanation: a.explanation,
-      evidence: { ref: a.ref, quote: a.quote },
-    },
-  ],
-});
+import { ann } from "./helpers";
 
 export const listeningPractice: ListeningSetInput[] = [
   /* ============================== B1 ============================== */

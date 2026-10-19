@@ -11,6 +11,7 @@ import {
   registerPlay,
   saveAnswer,
   saveWritingDraft,
+  selectSection,
   startAttempt,
   submitAttempt,
 } from "@/server/exam-engine";
@@ -211,6 +212,39 @@ describe("immutability", () => {
     const fv = await getAttemptView(db, other, fresh.attemptId, CFG);
     expect(JSON.stringify(fv.snapshot)).toContain("EDITED PROMPT");
     expect(fv.snapshot.blueprint.version).toBeGreaterThan(before.snapshot.blueprint.version);
+  });
+});
+
+describe("practice-mode section selection", () => {
+  it("lets a learner go straight to Reading and come back, and refuses this in exam mode", async () => {
+    const learner = await newLearner(db);
+    const { attemptId } = await startAttempt(db, learner, "mock-1", "practice");
+    const jumped = await selectSection(db, learner, attemptId, 1); // Reading first
+    expect(jumped.currentSection).toBe(1);
+    const v = await getAttemptView(db, learner, attemptId, CFG);
+    const rq = v.snapshot.sections[1]!.groups[0]!;
+    if (rq.kind !== "reading") throw new Error();
+    await saveAnswer(db, learner, { attemptId, questionId: rq.questions[0]!.id, response: "A" }, CFG);
+    // Finishing Reading returns to the still-open Listening section, not past it.
+    const back = await advanceSection(db, learner, attemptId, 1, CFG);
+    expect(back.currentSection).toBe(2); // next open after Reading is Writing
+    const back2 = await selectSection(db, learner, attemptId, 0);
+    expect(back2.currentSection).toBe(0);
+    await expect(selectSection(db, learner, attemptId, 1)).rejects.toMatchObject({ code: "closed" }); // Reading already finished
+
+    const exam = await startAttempt(db, learner, "mock-1", "exam");
+    await expect(selectSection(db, learner, exam.attemptId, 1)).rejects.toMatchObject({ code: "forbidden" });
+  });
+
+  it("closing another section does not submit an unfinished writing draft", async () => {
+    const learner = await newLearner(db);
+    const { attemptId } = await startAttempt(db, learner, "mock-1", "practice");
+    await selectSection(db, learner, attemptId, 2); // Writing
+    await saveWritingDraft(db, learner, { attemptId, promptId: "wr-m1-letter-job", text: "draft text here", wordCount: 3 }, CFG);
+    await selectSection(db, learner, attemptId, 1); // switch to Reading, leave writing open
+    await advanceSection(db, learner, attemptId, 1, CFG); // finish Reading
+    const [w] = await db.select().from(t.writingSubmissions).where(eq(t.writingSubmissions.attemptId, attemptId));
+    expect(w!.status).toBe("draft");
   });
 });
 

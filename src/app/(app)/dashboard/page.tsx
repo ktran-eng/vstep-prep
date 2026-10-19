@@ -28,7 +28,7 @@ export default async function DashboardPage() {
   return (
     <>
       <PageHeader
-        title={learner?.displayName ? `Xin chào, ${learner.displayName}` : t.nav.dashboard}
+        title={learner?.displayName || learner?.username ? `Xin chào, ${learner.displayName || learner.username}` : t.nav.dashboard}
         description={
           <>
             Mục tiêu: <Badge tone="primary">{dash.targetLevel}</Badge>
@@ -105,7 +105,7 @@ export default async function DashboardPage() {
                     {latest?.avgPrev != null && (
                       <p className="mt-1 text-xs text-muted">
                         Gần nhất {latest.score.toFixed(1)} so với trung bình trước đó {latest.avgPrev.toFixed(1)} ({latest.score - latest.avgPrev >= 0 ? "+" : ""}
-                        {(latest.score - latest.avgPrev).toFixed(1)}) · dựa trên {latest.n} lần — mẫu nhỏ, chỉ mang tính tham khảo.
+                        {(latest.score - latest.avgPrev).toFixed(1)}) · {latest.n} lần
                       </p>
                     )}
                   </div>

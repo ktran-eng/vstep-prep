@@ -159,7 +159,7 @@ export async function togglePlanTaskAction(formData: FormData) {
 
 /* --------------------------- Data rights --------------------------- */
 
-/** Permanently deletes every record linked to this browser's learner id, then issues a fresh id. */
+/** Permanently deletes the signed-in learner's profile and every record linked to it, then signs out. */
 export async function deleteMyDataAction(formData: FormData) {
   if (formData.get("confirm") !== "DELETE") throw new InputError("Confirmation text did not match.");
   const learnerId = await requireLearner();

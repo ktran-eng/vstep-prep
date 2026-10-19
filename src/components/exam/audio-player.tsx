@@ -17,6 +17,7 @@ export function AudioPlayer({
   maxPlays,
   onBeforePlay,
   onPlayed,
+  knownDuration,
 }: {
   src: string;
   title: string;
@@ -25,6 +26,8 @@ export function AudioPlayer({
   maxPlays: number;
   onBeforePlay: () => Promise<{ allowed: boolean; plays: number }>;
   onPlayed?: () => void;
+  /** Duration from the audio manifest; browsers mis-estimate length for MP3s without a VBR header. */
+  knownDuration?: number | null;
 }) {
   const { t } = useT();
   const ref = useRef<HTMLAudioElement>(null);
@@ -37,6 +40,7 @@ export function AudioPlayer({
   const [starting, setStarting] = useState(false);
   const exhausted = strict && plays >= maxPlays && !playing;
   const lastAllowed = useRef(0);
+  const shownDur = knownDuration || dur;
 
   useEffect(() => {
     const a = ref.current;
@@ -51,7 +55,7 @@ export function AudioPlayer({
       setPlaying(false);
       onPlayed?.();
     };
-    const onError = () => setErr("Audio could not be loaded. Check your connection and try again.");
+    const onError = () => setErr(t.audio.loadError);
     a.addEventListener("timeupdate", onTime);
     a.addEventListener("loadedmetadata", onMeta);
     a.addEventListener("ended", onEnd);
@@ -62,7 +66,7 @@ export function AudioPlayer({
       a.removeEventListener("ended", onEnd);
       a.removeEventListener("error", onError);
     };
-  }, [strict, onPlayed]);
+  }, [strict, onPlayed, t.audio.loadError]);
 
   async function toggle() {
     const a = ref.current;
@@ -92,7 +96,7 @@ export function AudioPlayer({
       await a.play();
       setPlaying(true);
     } catch {
-      setErr("Playback was blocked by the browser. Press play again.");
+      setErr(t.audio.blocked);
     }
   }
 
@@ -100,19 +104,19 @@ export function AudioPlayer({
     <div className="rounded-lg border border-border bg-surface-2 p-3" role="group" aria-label={`Audio: ${title}`}>
       <audio ref={ref} src={src} preload="metadata" />
       <div className="flex flex-wrap items-center gap-3">
-        <Button onClick={toggle} disabled={exhausted || starting || (strict && playing)} aria-label={playing ? "Pause" : "Play"} className="w-24">
-          {playing ? (strict ? "▶ …" : "❚❚ Pause") : "▶ Play"}
+        <Button onClick={toggle} disabled={exhausted || starting || (strict && playing)} aria-label={playing ? t.audio.pause : t.audio.play} className="w-28">
+          {playing ? (strict ? t.audio.playing : `❚❚ ${t.audio.pause}`) : `▶ ${t.audio.play}`}
         </Button>
         <div className="min-w-40 flex-1">
           <input
             type="range"
             min={0}
-            max={dur || 0}
+            max={shownDur || 0}
             step={0.1}
             value={pos}
             disabled={strict}
-            aria-label="Playback position"
-            aria-valuetext={`${formatDuration(pos)} of ${formatDuration(dur)}`}
+            aria-label={t.audio.position}
+            aria-valuetext={`${formatDuration(pos)} / ${formatDuration(shownDur)}`}
             onChange={(e) => {
               if (ref.current) ref.current.currentTime = Number(e.target.value);
             }}
@@ -120,11 +124,11 @@ export function AudioPlayer({
           />
           <div className="flex justify-between text-xs tabular-nums text-muted">
             <span>{formatDuration(pos)}</span>
-            <span>{dur ? formatDuration(dur) : "--:--"}</span>
+            <span>{shownDur ? formatDuration(shownDur) : "--:--"}</span>
           </div>
         </div>
         <label className="flex items-center gap-2 text-xs text-muted">
-          Vol
+          {t.audio.volume}
           <input
             type="range"
             min={0}
@@ -136,7 +140,7 @@ export function AudioPlayer({
               setVol(v);
               if (ref.current) ref.current.volume = v;
             }}
-            aria-label="Volume"
+            aria-label={t.audio.volume}
             className="w-20 accent-[var(--primary)]"
           />
         </label>

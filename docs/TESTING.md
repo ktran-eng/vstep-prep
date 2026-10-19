@@ -65,9 +65,26 @@ checks every item and test against the exam spec. Run it in CI; the seed refuses
 - Mobile (375 px) exam layout
 - Speaking: microphone denial shows a clear message. **Actual recording and upload could not be tested** because the test browser blocks microphone capture.
 
+## End-to-end tests (Playwright)
+
+```bash
+npm run test:e2e
+```
+
+This runs `tests/e2e/learner-journeys.spec.ts` in the installed **Microsoft Edge** (set `E2E_CHANNEL=chrome` or `chromium` to change browsers). It uses a fresh, seeded database in `~/.vstep-prep/e2e-db` and test-only secrets, and Chromium's fake media flags provide a microphone. Last run (2026-10-19): **9 passed**.
+
+1. Visitors without a sign-in name are redirected to `/start` and returned afterwards; names are case-insensitive
+2. Reading practice: answer, autosave, reload, submit, results with explanations and highlighted evidence, mistake notebook, dashboard updated
+3. Mock overview, then practice mode, then jumping straight to Reading
+4. Strict mock exam: server timer, fixed section order, no answer keys in the page HTML
+5. Listening practice: audio plays; the transcript is locked until one play
+6. Writing practice: autosave and submit; with no AI key the status reads "unavailable" and no score is shown
+7. Speaking practice: record with the fake mic, explicit consent required, upload, playback; another learner gets 404 for the recording
+8. Another learner cannot open someone else's attempt
+9. Admin: unauthenticated redirect, wrong passphrase rejected, login works, live content validation shows 0 errors
+
 ## Not automated yet
 
-- **End-to-end browser tests (Playwright).** The flows above were verified manually; browser binaries were not downloaded in this environment.
-- Speaking upload through a real `MediaRecorder` (Chrome, Edge, Firefox and Safari).
-- Live Anthropic and OpenAI calls (no keys configured).
+- Live Anthropic and OpenAI calls (no valid keys are configured in this environment). Grading is covered with fake providers in the integration tests.
+- Safari and Firefox recording (`MediaRecorder` codec differences).
 - Load testing.

@@ -35,10 +35,21 @@ async function loadOwnedAttempt(db: Db, learnerId: string, attemptId: string): P
   return a;
 }
 
-async function loadSnapshot(db: Db, snapshotId: string) {
-  const [s] = await db.select().from(blueprintSnapshots).where(eq(blueprintSnapshots.id, snapshotId));
+type LoadedSnapshot = { pub: PublicSnapshot; prot: ProtectedSnapshot };
+
+// Snapshots are immutable, so a small per-process cache saves re-reading large JSON payloads on every autosave.
+const SNAPSHOT_CACHE_MAX = 64;
+const snapshotCache = new Map<string, LoadedSnapshot>();
+
+async function loadSnapshot(db: Db, snapshotId: string): Promise<LoadedSnapshot> {
+  const hit = snapshotCache.get(snapshotId);
+  if (hit) return hit;
+  const [s] = await db.select({ pub: blueprintSnapshots.publicPayload, prot: blueprintSnapshots.protectedPayload }).from(blueprintSnapshots).where(eq(blueprintSnapshots.id, snapshotId));
   if (!s) throw new EngineError("not_found", "Snapshot missing");
-  return { pub: s.publicPayload as PublicSnapshot, prot: s.protectedPayload as ProtectedSnapshot };
+  const loaded = { pub: s.pub as PublicSnapshot, prot: s.prot as ProtectedSnapshot };
+  if (snapshotCache.size >= SNAPSHOT_CACHE_MAX) snapshotCache.delete(snapshotCache.keys().next().value!);
+  snapshotCache.set(snapshotId, loaded);
+  return loaded;
 }
 
 export async function startAttempt(db: Db, learnerId: string, blueprintId: string, mode: Mode, now = new Date()) {
@@ -84,20 +95,17 @@ async function findActive(db: Db, learnerId: string, blueprintId: string, mode: 
   return a ?? null;
 }
 
-/** Closes expired sections and, if the last section expired, finalises the attempt. Returns the fresh attempt row. */
+/**
+ * Closes the current section if its deadline passed (finalising the attempt after the last one).
+ * Only the current section can expire: later sections' clocks start when they are reached.
+ */
 async function enforceDeadlines(db: Db, attempt: Attempt, cfg: ScoringConfig, now: Date): Promise<Attempt> {
   if (attempt.status !== "in_progress" || attempt.mode !== "exam") return attempt;
-  let current = attempt;
-  // Loop because a long absence can expire several sections in a row... but sections after the current one
-  // have not started, so their clocks only start when reached. Only the current section can expire.
   const [sec] = await db
     .select()
     .from(attemptSections)
-    .where(and(eq(attemptSections.attemptId, current.id), eq(attemptSections.sectionOrder, current.currentSection)));
-  if (sec?.deadlineAt && isExpired(sec.deadlineAt, now)) {
-    current = await closeSection(db, current, "time_expired", cfg, sec.deadlineAt);
-  }
-  return current;
+    .where(and(eq(attemptSections.attemptId, attempt.id), eq(attemptSections.sectionOrder, attempt.currentSection)));
+  return sec?.deadlineAt && isExpired(sec.deadlineAt, now) ? closeSection(db, attempt, "time_expired", cfg, sec.deadlineAt) : attempt;
 }
 
 async function closeSection(db: Db, attempt: Attempt, reason: "learner_advanced" | "time_expired" | "learner_submitted", cfg: ScoringConfig, at: Date): Promise<Attempt> {
@@ -114,21 +122,26 @@ async function closeSection(db: Db, attempt: Attempt, reason: "learner_advanced"
     const [fresh] = await db.select().from(examAttempts).where(eq(examAttempts.id, attempt.id));
     return fresh!;
   }
-  await db
-    .update(writingSubmissions)
-    .set({ status: "submitted", submittedAt: at, updatedAt: at })
-    .where(and(eq(writingSubmissions.attemptId, attempt.id), eq(writingSubmissions.status, "draft")));
+  // Only the closed section's writing drafts become final (sections can be visited out of order in practice mode).
+  if (cur.skill === "writing")
+    await db
+      .update(writingSubmissions)
+      .set({ status: "submitted", submittedAt: at, updatedAt: at })
+      .where(and(eq(writingSubmissions.attemptId, attempt.id), eq(writingSubmissions.status, "draft")));
 
-  const next = sections.find((s) => s.sectionOrder > cur.sectionOrder);
+  // Next open section: the first unsubmitted one after this, otherwise any earlier one still open (practice mode jumps).
+  const open = sections.filter((s) => s.sectionOrder !== cur.sectionOrder && !s.submittedAt);
+  const next = open.find((s) => s.sectionOrder > cur.sectionOrder) ?? open[0];
   if (next && reason !== "learner_submitted") {
     const { pub } = await loadSnapshot(db, attempt.snapshotId);
     const nextPub = pub.sections.find((s) => s.order === next.sectionOrder)!;
     // The next section's clock starts now (not at the old deadline): the learner sees a fresh full limit.
     const startAt = new Date(Math.max(at.getTime(), Date.now()));
-    await db
-      .update(attemptSections)
-      .set({ startedAt: startAt, deadlineAt: attempt.mode === "exam" ? computeDeadline(startAt, nextPub.timeLimitSeconds) : null })
-      .where(and(eq(attemptSections.attemptId, attempt.id), eq(attemptSections.sectionOrder, next.sectionOrder)));
+    if (!next.startedAt)
+      await db
+        .update(attemptSections)
+        .set({ startedAt: startAt, deadlineAt: attempt.mode === "exam" ? computeDeadline(startAt, nextPub.timeLimitSeconds) : null })
+        .where(and(eq(attemptSections.attemptId, attempt.id), eq(attemptSections.sectionOrder, next.sectionOrder)));
     const [updated] = await db
       .update(examAttempts)
       .set({ currentSection: next.sectionOrder, updatedAt: new Date() })
@@ -161,23 +174,28 @@ async function finalizeAttempt(db: Db, attempt: Attempt, reason: "time_expired" 
 }
 
 async function gradeAttemptObjective(db: Db, attempt: Attempt) {
-  const { pub, prot } = await loadSnapshot(db, attempt.snapshotId);
-  const answers = await db.select().from(attemptAnswers).where(eq(attemptAnswers.attemptId, attempt.id));
+  const [{ pub, prot }, answers] = await Promise.all([loadSnapshot(db, attempt.snapshotId), db.select().from(attemptAnswers).where(eq(attemptAnswers.attemptId, attempt.id))]);
+  const byId = new Map(answers.map((a) => [a.questionId, a]));
   const now = new Date();
-  for (const sec of pub.sections) {
-    for (const g of sec.groups) {
-      if (g.kind !== "reading" && g.kind !== "listening") continue;
-      for (const q of g.questions) {
-        const key = prot.answers[q.id];
-        const a = answers.find((x) => x.questionId === q.id);
-        const correct = Boolean(a?.response && key && a.response === key.answer);
-        await db
-          .insert(attemptAnswers)
-          .values({ attemptId: attempt.id, questionId: q.id, sectionOrder: sec.order, response: a?.response ?? null, isCorrect: correct, score: correct ? 1 : 0, gradedAt: now })
-          .onConflictDoUpdate({ target: [attemptAnswers.attemptId, attemptAnswers.questionId], set: { isCorrect: correct, score: correct ? 1 : 0, gradedAt: now } });
-      }
-    }
-  }
+  const rows = pub.sections.flatMap((sec) =>
+    sec.groups.flatMap((g) =>
+      g.kind === "reading" || g.kind === "listening"
+        ? g.questions.map((q) => {
+            const response = byId.get(q.id)?.response ?? null;
+            const correct = Boolean(response && response === prot.answers[q.id]?.answer);
+            return { attemptId: attempt.id, questionId: q.id, sectionOrder: sec.order, response, isCorrect: correct, score: correct ? 1 : 0, gradedAt: now };
+          })
+        : [],
+    ),
+  );
+  if (!rows.length) return;
+  await db
+    .insert(attemptAnswers)
+    .values(rows)
+    .onConflictDoUpdate({
+      target: [attemptAnswers.attemptId, attemptAnswers.questionId],
+      set: { isCorrect: sql`excluded.is_correct`, score: sql`excluded.score`, gradedAt: sql`excluded.graded_at` },
+    });
 }
 
 export type SkillResult = {
@@ -202,10 +220,12 @@ export type ScoreSummary = {
 export async function recomputeSummary(db: Db, attemptId: string, cfg: ScoringConfig): Promise<Attempt> {
   const [attempt] = await db.select().from(examAttempts).where(eq(examAttempts.id, attemptId));
   if (!attempt) throw new EngineError("not_found", "Attempt not found");
-  const { pub, prot } = await loadSnapshot(db, attempt.snapshotId);
-  const answers = await db.select().from(attemptAnswers).where(eq(attemptAnswers.attemptId, attemptId));
-  const writing = await db.select().from(writingSubmissions).where(eq(writingSubmissions.attemptId, attemptId));
-  const speaking = await db.select().from(speakingSubmissions).where(eq(speakingSubmissions.attemptId, attemptId));
+  const [{ pub, prot }, answers, writing, speaking] = await Promise.all([
+    loadSnapshot(db, attempt.snapshotId),
+    db.select().from(attemptAnswers).where(eq(attemptAnswers.attemptId, attemptId)),
+    db.select().from(writingSubmissions).where(eq(writingSubmissions.attemptId, attemptId)),
+    db.select().from(speakingSubmissions).where(eq(speakingSubmissions.attemptId, attemptId)),
+  ]);
 
   const skills: SkillResult[] = [];
   let rawCorrect = 0;
@@ -280,12 +300,17 @@ export async function recomputeSummary(db: Db, attemptId: string, cfg: ScoringCo
 export async function getAttemptView(db: Db, learnerId: string, attemptId: string, cfg: ScoringConfig, now = new Date()) {
   let attempt = await loadOwnedAttempt(db, learnerId, attemptId);
   attempt = await enforceDeadlines(db, attempt, cfg, now);
-  const { pub, prot } = await loadSnapshot(db, attempt.snapshotId);
-  const sections = await db.select().from(attemptSections).where(eq(attemptSections.attemptId, attempt.id)).orderBy(asc(attemptSections.sectionOrder));
-  const answers = await db.select().from(attemptAnswers).where(eq(attemptAnswers.attemptId, attempt.id));
-  const writing = await db.select().from(writingSubmissions).where(eq(writingSubmissions.attemptId, attempt.id));
-  const speaking = await db.select({ id: speakingSubmissions.id, promptId: speakingSubmissions.promptId, gradingStatus: speakingSubmissions.gradingStatus, durationSeconds: speakingSubmissions.durationSeconds }).from(speakingSubmissions).where(eq(speakingSubmissions.attemptId, attempt.id));
-  const plays = await db.select().from(listeningPlays).where(eq(listeningPlays.attemptId, attempt.id));
+  const [{ pub, prot }, sections, answers, writing, speaking, plays] = await Promise.all([
+    loadSnapshot(db, attempt.snapshotId),
+    db.select().from(attemptSections).where(eq(attemptSections.attemptId, attempt.id)).orderBy(asc(attemptSections.sectionOrder)),
+    db.select().from(attemptAnswers).where(eq(attemptAnswers.attemptId, attempt.id)),
+    db.select().from(writingSubmissions).where(eq(writingSubmissions.attemptId, attempt.id)),
+    db
+      .select({ id: speakingSubmissions.id, promptId: speakingSubmissions.promptId, gradingStatus: speakingSubmissions.gradingStatus, durationSeconds: speakingSubmissions.durationSeconds })
+      .from(speakingSubmissions)
+      .where(eq(speakingSubmissions.attemptId, attempt.id)),
+    db.select().from(listeningPlays).where(eq(listeningPlays.attemptId, attempt.id)),
+  ]);
 
   const finished = attempt.status !== "in_progress";
   // Release policy: exam → everything after the whole attempt ends. Practice → a section's keys after that section is submitted.
@@ -418,6 +443,22 @@ export async function assertSpeakingWritable(db: Db, learnerId: string, attemptI
   if (!sec) throw new EngineError("invalid", "Unknown prompt");
   if (sec.order !== attempt.currentSection) throw new EngineError("wrong_section", "That section is closed.");
   return attempt.mode as Mode;
+}
+
+/**
+ * Practice mode only: switch to any section that is still open (e.g. go straight to Reading).
+ * Exam mode keeps the official fixed order, so this is refused there.
+ */
+export async function selectSection(db: Db, learnerId: string, attemptId: string, sectionOrder: number) {
+  const attempt = await loadOwnedAttempt(db, learnerId, attemptId);
+  if (attempt.status !== "in_progress") throw new EngineError("closed", "This attempt has already been submitted.");
+  if (attempt.mode !== "practice") throw new EngineError("forbidden", "Sections must be taken in order in exam mode.");
+  const [sec] = await db.select().from(attemptSections).where(and(eq(attemptSections.attemptId, attemptId), eq(attemptSections.sectionOrder, sectionOrder)));
+  if (!sec) throw new EngineError("invalid", "Unknown section");
+  if (sec.submittedAt) throw new EngineError("closed", "That section is already finished.");
+  if (!sec.startedAt) await db.update(attemptSections).set({ startedAt: new Date() }).where(and(eq(attemptSections.attemptId, attemptId), eq(attemptSections.sectionOrder, sectionOrder)));
+  const [updated] = await db.update(examAttempts).set({ currentSection: sectionOrder, updatedAt: new Date() }).where(eq(examAttempts.id, attemptId)).returning();
+  return updated!;
 }
 
 /** Learner finishes the current section and moves to the next (or finalises after the last). */

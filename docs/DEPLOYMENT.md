@@ -57,7 +57,7 @@ or replace the files with studio recordings, and update `content/audio-manifest.
 ## 4. Deploy (Vercel)
 
 1. Import the repository and set the environment variables for Production (and Preview, with a separate database).
-2. The build command is `next build`. No special output settings are needed.
+2. `vercel.json` pins `"framework": "nextjs"` and the build command. If the project was first imported with another preset, the earlier deployment shows Vercel's own `404 NOT_FOUND` page; redeploy after pulling this file. Also check that **Settings → Build and Deployment → Framework Preset** reads Next.js.
 3. `vercel.json` registers the daily retention cron. Vercel sends `Authorization: Bearer $CRON_SECRET` automatically.
 4. Server actions accept up to 12 MB request bodies (configured in `next.config.ts`) for speaking uploads. Make sure your host's request limit is at least that, and on Vercel use a plan whose function body limit allows it.
 5. HTTPS and the domain are configured in the host dashboard. The app sets `Secure` cookies in production.

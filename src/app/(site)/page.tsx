@@ -24,12 +24,12 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
           <h1 className="mt-2 text-3xl font-semibold tracking-tight sm:text-4xl">Luyện thi VSTEP hiệu quả, biết rõ mình yếu ở đâu</h1>
           <p className="mt-4 max-w-2xl text-lg text-muted">{t.tagline}.</p>
           <div className="mt-6 flex flex-wrap gap-3">
-            <ButtonLink href="/dashboard">Bắt đầu luyện tập</ButtonLink>
+            <ButtonLink href="/start">Bắt đầu luyện tập</ButtonLink>
             <ButtonLink href="/guide" variant="secondary">
               Tìm hiểu kỳ thi VSTEP
             </ButtonLink>
           </div>
-          <p className="mt-3 text-sm text-muted">Miễn phí, không cần tài khoản — tiến độ được lưu ẩn danh trên trình duyệt của bạn.</p>
+          <p className="mt-3 text-sm text-muted">Miễn phí, không cần mật khẩu — chỉ cần chọn một tên đăng nhập, tiến độ được lưu theo tên đó.</p>
         </div>
         <Card className="text-sm">
           <h2 className="mb-3 font-semibold">Cấu trúc bài thi (QĐ 729/QĐ-BGDĐT)</h2>

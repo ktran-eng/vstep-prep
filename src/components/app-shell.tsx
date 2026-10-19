@@ -4,6 +4,7 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { useT } from "@/i18n/client";
 import { cx } from "./ui";
+import { signOutAction } from "@/app/actions/session";
 
 const ICONS: Record<string, string> = {
   dashboard: "M3 12l9-8 9 8M5 10v10h14V10",
@@ -28,7 +29,23 @@ function Icon({ name }: { name: string }) {
   );
 }
 
-export function AppShell({ children }: { children: React.ReactNode }) {
+function UserBox({ username }: { username: string }) {
+  return (
+    <div className="rounded-lg border border-border px-3 py-2 text-sm">
+      <p className="text-xs text-muted">Đang học với tên</p>
+      <p className="truncate font-medium" title={username}>
+        {username}
+      </p>
+      <form action={signOutAction}>
+        <button type="submit" className="mt-1 text-xs text-primary hover:underline">
+          Đổi tên đăng nhập
+        </button>
+      </form>
+    </div>
+  );
+}
+
+export function AppShell({ children, username }: { children: React.ReactNode; username?: string | null }) {
   const { t } = useT();
   const pathname = usePathname();
   // The mobile menu is "open for" a specific path, so navigating closes it without an effect.
@@ -84,6 +101,11 @@ export function AppShell({ children }: { children: React.ReactNode }) {
             {t.appName}
           </Link>
           {nav}
+          {username && (
+            <div className="mt-auto">
+              <UserBox username={username} />
+            </div>
+          )}
         </div>
       </aside>
 
@@ -103,8 +125,9 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           </button>
         </header>
         {open && (
-          <div id="mobile-nav" className="border-b border-border bg-surface p-3 lg:hidden">
+          <div id="mobile-nav" className="space-y-3 border-b border-border bg-surface p-3 lg:hidden">
             {nav}
+            {username && <UserBox username={username} />}
           </div>
         )}
         <main id="main" className="mx-auto w-full max-w-6xl flex-1 px-4 py-6 sm:px-6 lg:py-8">

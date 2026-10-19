@@ -166,6 +166,110 @@ export const speakingPrompts: SpeakingPromptInput[] = [
       "I think a gap year can be extremely valuable, but I wouldn't say that every young person should take one. Let me start with the benefits. Many students choose a university subject at eighteen without really knowing what they want, partly because of pressure from family. A year spent working, volunteering or travelling gives them time to mature and discover their interests, so they're more likely to choose the right course and study with real motivation. They also develop independence, for instance managing money or living away from home for the first time, and employers increasingly value that kind of experience. On the other hand, there are genuine risks. Some students lose the habit of studying and find it difficult to return, and if the year isn't planned, it can easily turn into twelve months of doing very little. For families with limited resources, a gap year may also simply be unaffordable, especially if it involves travel. So, in my view, the decision should depend on the individual and, crucially, on having a clear plan. Turning to the follow-up questions, I think gap years are less common in Vietnam because there's a strong expectation that students go straight from school to university, and taking a year off can be seen as falling behind. Personally, I'd consider it only if I had a concrete project, such as a structured volunteering programme.",
     usefulLanguage: ["I wouldn't say that every…", "Let me start with…", "On the other hand, there are genuine risks.", "Crucially, …", "Turning to the follow-up questions, …"],
   },
+  /* ------------------------------ Mock 4 ------------------------------ */
+  {
+    id: "sp-m4-p1",
+    level: "B1",
+    title: "Studies or work · Transport",
+    topic: "Daily life",
+    instructions: P1_INSTR,
+    content: {
+      part: 1,
+      topics: [
+        { name: "Studies or work", questions: ["Do you work or study?", "What do you like most about your job or studies?", "What would you like to change about it?"] },
+        { name: "Transport", questions: ["How do you usually travel to school or work?", "Is public transport good where you live?", "Would you like to use a bicycle more often? Why or why not?"] },
+      ],
+    },
+    ...P1,
+    modelResponse:
+      "I'm a third-year student of business administration at a university in Ho Chi Minh City. What I like most about my studies is working on group projects, because I learn a lot from my classmates and we often visit real companies. If I could change one thing, I'd like to have more practical classes and fewer long lectures. I usually travel to university by motorbike, which takes about twenty minutes, but in the rainy season it can take much longer because of traffic jams. Public transport is improving: there is a new metro line, but it doesn't go near my house yet. I'd like to cycle more, because it's healthy and cheap, but honestly the air pollution and the heat make it quite difficult.",
+    usefulLanguage: ["What I like most about… is…", "If I could change one thing, I'd…", "…, which takes about…", "Honestly, … make it quite difficult."],
+  },
+  {
+    id: "sp-m4-p2",
+    level: "B2",
+    title: "Improving a neighbourhood",
+    topic: "Community",
+    instructions: P2_INSTR,
+    content: {
+      part: 2,
+      situation: "Your neighbourhood has received money from the city to improve life for residents. People have suggested three projects.",
+      options: ["Build a small park with a children's playground", "Open a community library and study room", "Install more street lights and security cameras"],
+    },
+    ...P2,
+    modelResponse:
+      "In my opinion, the best project would be building a small park with a children's playground. At the moment, there is almost no green space in our neighbourhood, so children play on the pavement or in narrow alleys, which is dangerous. A park would give families a safe place to relax, older people could exercise there in the morning, and it would also help to cool the area in summer. A community library and study room is a good idea, but many students already have access to libraries at their schools, and lots of information is now online, so I think fewer people would use it regularly. More street lights and cameras would improve safety, but our area is already fairly safe, and cameras can make some residents feel watched. So overall, a park would benefit the largest number of people every day.",
+    usefulLanguage: ["In my opinion, the best project would be…", "At the moment, there is almost no…", "…is a good idea, but…", "So overall, … would benefit the largest number of people."],
+  },
+  {
+    id: "sp-m4-p3",
+    level: "B2",
+    title: "Working from home",
+    topic: "Work",
+    instructions: P3_INSTR,
+    content: {
+      part: 3,
+      topic: "Working from home has more advantages than disadvantages.",
+      ideas: ["saving time and money", "flexibility", "loneliness and less teamwork", "(your own ideas)"],
+      followUps: ["What kinds of jobs cannot be done from home?", "How can companies help employees who work from home?", "Would you prefer to work from home or in an office? Why?"],
+    },
+    ...P3,
+    modelResponse:
+      "I believe working from home has more advantages than disadvantages, as long as it is organised well. The first advantage is saving time and money. Many people in big cities spend one or two hours a day commuting, and working from home gives them that time back for rest, family or exercise. They also save money on petrol and lunches. Secondly, working from home offers flexibility. Parents can look after their children more easily, and people can work at the times when they are most productive. However, there are some disadvantages. Some people feel lonely because they don't see their colleagues, and teamwork can be harder when everything happens through video calls. New employees in particular may find it difficult to learn without experienced colleagues nearby. In my view, the best solution is a hybrid system, with two or three days at home and the rest in the office. To answer the follow-up questions, jobs like nursing, cooking or construction obviously cannot be done from home. Companies can help by providing good equipment and organising regular team activities. Personally, I'd prefer a mix, because I need some quiet time to concentrate but I also enjoy meeting people.",
+    usefulLanguage: ["…, as long as it is organised well.", "The first advantage is… Secondly, …", "However, there are some disadvantages.", "In my view, the best solution is…"],
+  },
+  /* ------------------------------ Mock 5 ------------------------------ */
+  {
+    id: "sp-m5-p1",
+    level: "B1",
+    title: "Holidays · Cooking",
+    topic: "Leisure",
+    instructions: P1_INSTR,
+    content: {
+      part: 1,
+      topics: [
+        { name: "Holidays", questions: ["Where did you go on your last holiday?", "Do you prefer holidays by the sea or in the mountains?", "Who do you usually go on holiday with?"] },
+        { name: "Cooking", questions: ["Can you cook? What dishes can you make?", "Who does most of the cooking in your family?", "Do you think cooking classes are useful for young people?"] },
+      ],
+    },
+    ...P1,
+    modelResponse:
+      "My last holiday was in Da Lat with my family during the Tet holiday. We visited flower gardens and drank a lot of hot coffee, because the weather was quite cold. I prefer the mountains to the sea, because it's cooler and quieter, and I enjoy walking in the forest. I usually go on holiday with my family, but last summer I went to Phu Quoc with some university friends, and that was a lot of fun too. As for cooking, I can make a few simple dishes, like fried rice, omelettes and noodle soup. My mother does most of the cooking in our family, because she's an excellent cook and she enjoys it. I think cooking classes are very useful for young people, because many of them live alone when they go to university, and cooking at home is cheaper and healthier than eating out every day.",
+    usefulLanguage: ["My last holiday was in…", "I prefer… to… because…", "As for…, …", "…is cheaper and healthier than…"],
+  },
+  {
+    id: "sp-m5-p2",
+    level: "B2",
+    title: "Preparing for an English exam",
+    topic: "Education",
+    instructions: P2_INSTR,
+    content: {
+      part: 2,
+      situation: "Your friend has three months to prepare for the VSTEP exam and needs to reach B2, but has a limited budget.",
+      options: ["Join an expensive preparation course at a language centre", "Study alone using free websites and mock tests", "Form a study group with classmates"],
+    },
+    ...P2,
+    modelResponse:
+      "Considering that my friend has a limited budget and only three months, I would recommend forming a study group with classmates. A study group costs almost nothing, and it solves one of the biggest problems of studying alone: the lack of speaking practice. Members can practise the speaking parts together, check each other's writing and keep each other motivated, which is very important over three months. Studying alone with free websites is also cheap, and there are many good mock tests online, but it's easy to lose motivation, and nobody corrects your speaking or writing mistakes. An expensive course would probably be well organised and provide expert feedback, but it doesn't suit my friend's budget, and paying a lot of money doesn't guarantee progress if the learner doesn't practise. Ideally, the group could combine both approaches by using free mock tests together every week.",
+    usefulLanguage: ["Considering that…, I would recommend…", "…solves one of the biggest problems of…", "…is also…, but…", "Ideally, …"],
+  },
+  {
+    id: "sp-m5-p3",
+    level: "C1",
+    title: "Social media and young people",
+    topic: "Technology & society",
+    instructions: P3_INSTR,
+    content: {
+      part: 3,
+      topic: "Social media has a negative influence on young people.",
+      ideas: ["mental health and self-esteem", "learning and creativity", "staying connected", "(your own ideas)"],
+      followUps: ["Should there be a minimum age for using social media?", "What responsibility do platforms have for young users?", "How do you personally manage your time on social media?"],
+    },
+    ...P3,
+    modelResponse:
+      "I think the statement is partly true, but it oversimplifies a complicated picture. On the negative side, there's growing evidence that heavy use of image-focused platforms is linked to anxiety and low self-esteem, particularly among teenage girls who constantly compare themselves with carefully edited images. Endless scrolling can also eat into sleep and study time. However, social media isn't inherently harmful. Many young people use it to learn skills, from coding to cooking, and to share creative work with an audience they could never have reached before. It also helps them stay connected with friends and family, especially those who study far from home. So rather than asking whether social media is good or bad, I'd argue we should focus on how it's used and how platforms are designed. Turning to the follow-up questions, I do support a minimum age, around thirteen, although it's hard to enforce. Platforms should take responsibility by limiting features like infinite scrolling for younger users and by making privacy settings strict by default. Personally, I turn off most notifications and set a daily time limit on my phone, which has made a real difference.",
+    usefulLanguage: ["…, but it oversimplifies a complicated picture.", "On the negative side, there's growing evidence that…", "…isn't inherently harmful.", "Rather than asking whether…, I'd argue we should…"],
+  },
   /* ----------------------------- Practice ----------------------------- */
   {
     id: "sp-p-b1-p1",

@@ -13,6 +13,7 @@ import {
   registerPlay,
   saveAnswer,
   saveWritingDraft,
+  selectSection,
   startAttempt,
   submitAttempt,
   toggleMark,
@@ -86,6 +87,15 @@ export async function advanceSectionAction(input: { attemptId: string; expectedS
     const a = await advanceSection(await getDb(), learnerId, p.attemptId, p.expectedSection, await getScoringConfig());
     if (a.status !== "in_progress") scheduleGrading(learnerId, a.id);
     return { status: a.status, currentSection: a.currentSection };
+  });
+}
+
+export async function selectSectionAction(input: { attemptId: string; sectionOrder: number }) {
+  return run(async () => {
+    const learnerId = await requireLearner();
+    const p = z.object({ attemptId: uuid, sectionOrder: z.number().int().min(0).max(10) }).parse(input);
+    const a = await selectSection(await getDb(), learnerId, p.attemptId, p.sectionOrder);
+    return { currentSection: a.currentSection };
   });
 }
 
